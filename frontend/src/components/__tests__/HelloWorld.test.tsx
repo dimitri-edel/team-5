@@ -4,7 +4,7 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import { HelloWorld } from '../HelloWorld';
 
-const API_URL = 'https://team5-api-eu-5d24fa110c36.herokuapp.com/';
+const API_URL = '/api';
 
 const server = setupServer(
   rest.get(API_URL, (req, res, ctx) => {
