@@ -65,7 +65,6 @@ erDiagram
     User ||--o{ PrivateMessage : sends
     PublicChatRoom ||--o{ PublicMessage : contains
     PrivateChatRoom ||--o{ PrivateMessage : contains
-    PublicMessage ||--o{ File : has (optional)
-    PrivateMessage ||--o{ File : has (optional)
-    User ||--o{ PrivateChatRoom : participates in (user1)
-    User ||--o{ PrivateChatRoom : participates in (user2)
+    PublicMessage ||--o{ File : may_have
+    PrivateMessage ||--o{ File : may_have
+   
