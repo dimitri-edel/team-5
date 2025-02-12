@@ -6,6 +6,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.core import serializers
 
+class HelloWorld(APIView):
+    def get(self, request):
+        return Response({"message": "Hello, World!"})
+
 class Students(APIView):
     # retrieve a list of the Student records in the DB
     def get(self, request):

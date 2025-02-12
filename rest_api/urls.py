@@ -20,6 +20,7 @@ from django.conf.urls import url
 from rest_api import views
 
 urlpatterns = [
+    path('', views.HelloWorld.as_view()),
     path('admin/', admin.site.urls),
     path('students/', views.Students.as_view()),
     url(r'^students/(?P<id>[0-9]+)$', views.StudentInstance.as_view()),
