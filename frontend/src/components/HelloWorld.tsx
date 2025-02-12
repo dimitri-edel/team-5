@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = 'https://team5-api-eu-5d24fa110c36.herokuapp.com/';
+// Use the proxied URL in development
+const API_URL = '/api';
 
 interface ApiResponse {
   message: string;
@@ -21,6 +22,7 @@ export function HelloWorld() {
       } catch (err) {
         setError('Failed to fetch message from API');
         setMessage('');
+        console.error('API Error:', err);
       } finally {
         setLoading(false);
       }
