@@ -7,7 +7,7 @@ import { HelloWorld } from '../HelloWorld';
 const API_URL = '/api';
 
 const server = setupServer(
-  rest.get(API_URL, (req, res, ctx) => {
+  rest.get(API_URL, (_, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({ message: 'Hello, World!' })
@@ -45,7 +45,7 @@ describe('HelloWorld Component', () => {
   it('should display error message when API fails', async () => {
     // Override the default handler to return an error
     server.use(
-      rest.get(API_URL, (req, res, ctx) => {
+      rest.get(API_URL, (_, res, ctx) => {
         return res(ctx.status(500));
       })
     );
