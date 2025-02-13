@@ -57,14 +57,19 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS settings - not needed anymore since we're serving from same origin
+# CORS settings for API access
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "https://team5-api-eu-5d24fa110c36.herokuapp.com",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
 ]
+
+# Ensure all API responses have CORS headers
+CORS_URLS_REGEX = r'^/api/.*$'
 
 ROOT_URLCONF = 'rest_api.urls'
 
@@ -134,10 +139,6 @@ ALLOWED_HOSTS = ['*']
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-
-# Configure CORS to allow frontend requests
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_URLS_REGEX = r'^/api/.*$'
 
 # Configure Django app for Heroku deployment
 django_heroku.settings(locals())
