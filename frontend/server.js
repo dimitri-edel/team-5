@@ -56,7 +56,7 @@ app.use('/api', (req, res) => {
     method: req.method,
     headers: {
       ...req.headers,
-      host: new URL(apiUrl).host // Fix host header
+      host: new URL(apiUrl).host
     },
     body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined
   })
@@ -69,14 +69,8 @@ app.use('/api', (req, res) => {
 });
 
 // Serve index.html for all other routes (SPA support)
-app.get('*', (req, res, next) => {
-  const indexPath = path.join(__dirname, 'dist', 'index.html');
-  res.sendFile(indexPath, err => {
-    if (err) {
-      console.error(`Error sending index.html: ${err.message}`);
-      next(err);
-    }
-  });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // Error handling middleware
