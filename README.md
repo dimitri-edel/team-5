@@ -56,7 +56,6 @@ erDiagram
     }
 
     User ||--o{ UserProfile : has
-    User ||--o{ PublicMessage : sends
     User ||--o{ PrivateMessage : sends
     PrivateChatRoom ||--o{ PrivateMessage : contains
     PrivateMessage ||--o{ File : may_have
