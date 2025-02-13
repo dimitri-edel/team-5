@@ -43,7 +43,6 @@ export default defineConfig({
       '/api': {
         target: 'https://team5-api-eu-5d24fa110c36.herokuapp.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },

@@ -48,8 +48,8 @@ app.use(express.static(path.join(__dirname, 'dist'), {
 // Proxy API requests to the backend
 app.use('/api', (req, res) => {
   const apiUrl = process.env.NODE_ENV === 'production' 
-    ? 'https://team5-api-eu-5d24fa110c36.herokuapp.com/api'
-    : 'http://127.0.0.1:8000/api';
+    ? 'https://team5-api-eu-5d24fa110c36.herokuapp.com'  // Remove /api since it's already in the path
+    : 'http://127.0.0.1:8000';
   
   // Forward the request to the API
   fetch(`${apiUrl}${req.url}`, {
