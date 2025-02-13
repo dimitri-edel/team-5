@@ -9,6 +9,17 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: ['./src/setupTests.js'],
   },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+      },
+    },
+  },
   server: {
     proxy: {
       '/api': {
