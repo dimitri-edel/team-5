@@ -94,14 +94,8 @@ erDiagram
         int room_id FK
         string message_text
         datetime sent_at
-    }
-    File {
-        int file_id PK
-        string file_name
-        string file_type
-        string file_url
-        datetime uploaded_at
-    }    
+        file attachment 
+    }   
     Match {
         int match_id PK
         int user1_id FK
@@ -122,7 +116,6 @@ erDiagram
     User ||--o{ UserProfile : has
     User ||--o{ PrivateMessage : sends
     PrivateChatRoom ||--o{ PrivateMessage : contains
-    PrivateMessage ||--o{ File : may_have
     UserProfile ||--o{ Likes : one_to_many
     UserProfile ||--o{ Match : many_to_many
 ```
