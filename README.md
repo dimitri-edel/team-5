@@ -53,10 +53,23 @@ erDiagram
         string file_type
         string file_url
         datetime uploaded_at
+    }    
+    Match {
+        int match_id PK
+        int user1_id FK
+        int user2_id FK
+        datetime matched_at
+    }
+    Likes {
+        int like_id PK
+        int liker_profile_id FK
+        int liked_profile_id FK
+        datetime liked_at
     }
 
     User ||--o{ UserProfile : has
     User ||--o{ PrivateMessage : sends
     PrivateChatRoom ||--o{ PrivateMessage : contains
     PrivateMessage ||--o{ File : may_have
-   
+    UserProfile ||--o{ UserProfile : one_to_many
+    User ||--o{ Match : one_to_many
