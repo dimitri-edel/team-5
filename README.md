@@ -122,6 +122,8 @@ erDiagram
     User ||--o{ PrivateMessage : sends
     PrivateChatRoom ||--o{ PrivateMessage : contains
     PrivateMessage ||--o{ File : may_have
+    UserProfile ||--o{ Likes : one_to_many
+    UserProfile ||--o{ Match : many_to_many
 ```
 
 
