@@ -44,6 +44,26 @@ app.use(express.static(path.join(__dirname, 'dist'), {
   }
 }));
 
+// Proxy API requests to the backend
+app.use('/api', (req, res) => {
+  const apiUrl = process.env.NODE_ENV === 'production' 
+    ? 'https://team5-api-eu-5d24fa110c36.herokuapp.com/api'
+    : 'http://127.0.0.1:8000/api';
+  
+  // Forward the request to the API
+  fetch(`${apiUrl}${req.url}`, {
+    method: req.method,
+    headers: req.headers,
+    body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined
+  })
+  .then(apiRes => apiRes.json())
+  .then(data => res.json(data))
+  .catch(error => {
+    console.error('API proxy error:', error);
+    res.status(500).json({ error: 'Failed to fetch from API' });
+  });
+});
+
 // Handle client-side routing
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
@@ -56,8 +76,8 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Frontend server is running on port ${PORT}`);
 }).on('error', (err) => {
   if (err.code === 'EADDRINUSE') {
     console.error(`Port ${PORT} is already in use`);
