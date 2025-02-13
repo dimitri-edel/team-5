@@ -1,2 +1,2 @@
-web: cd frontend && npm install && npm run build && npm start
+web: cd frontend && node server.js
 api: gunicorn rest_api.wsgi --log-file -
