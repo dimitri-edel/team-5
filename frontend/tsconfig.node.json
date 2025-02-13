@@ -1,10 +1,26 @@
 {
   "compilerOptions": {
+    //Added Jsx configuration, to allow files written with Jsx extention to be considered.
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "strict":true,
+    "esModuleInterop": false,
+
     "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["vite.config.ts"]
+  "include": [
+    "vite.config.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx"
+  ]
+
+  //"allowJs": true Lets typescript compile Javaacript files(.js and jsx)
+  //"jsx": So that jsx works correctly in (.tx and .jsx files)
+  //"include": tells Typescript to include both (.tsx and .jsx files)
 }
