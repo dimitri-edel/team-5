@@ -117,6 +117,7 @@ erDiagram
     User ||--o{ PrivateMessage : sends
     PrivateChatRoom ||--o{ PrivateMessage : contains
     PrivateMessage ||--o{ File : may_have
+```
 
 
 ## **💻 Tech Stack**
