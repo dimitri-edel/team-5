@@ -12,8 +12,9 @@ test('Frontend displays hello world message from API in development', async ({ p
   // Test the frontend application
   await page.goto('http://localhost:5173/');
   
-  // Wait for loading state to disappear
+  // Wait for loading state to disappear and log the page content for debugging
   await page.waitForSelector('[data-testid="loading"]', { state: 'hidden' });
+  console.log('Page content after loading:', await page.content());
   
   // Check for the message
   const messageElement = await page.getByTestId('hello-world');
@@ -31,8 +32,8 @@ test('Frontend handles API errors gracefully in development', async ({ page }) =
   // Wait for loading state to disappear
   await page.waitForSelector('[data-testid="loading"]', { state: 'hidden' });
   
-  // Check for error message
+  // Check for error message with the actual text
   const errorElement = await page.getByTestId('error');
   await expect(errorElement).toBeVisible();
-  await expect(errorElement).toHaveText('Failed to fetch message from API');
+  await expect(errorElement).toHaveText('Failed to fetch message from API: Network Error');
 }); 
