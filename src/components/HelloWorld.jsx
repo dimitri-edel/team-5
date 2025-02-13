@@ -1,24 +1,21 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// Use the proxied URL in development, direct URL in production
-const API_URL = import.meta.env.PROD 
-  ? 'https://team5-api-eu-5d24fa110c36.herokuapp.com/'
-  : '/api';
-
-interface ApiResponse {
-  message: string;
-}
+const PROD_API_URL = 'https://team5-api-eu-5d24fa110c36.herokuapp.com/';
+const DEV_API_URL = '/api';
 
 export function HelloWorld() {
-  const [message, setMessage] = useState<string>('');
-  const [error, setError] = useState<string>('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMessage = async () => {
       try {
-        const response = await axios.get<ApiResponse>(API_URL);
+        // Use the development URL by default
+        const apiUrl = process.env.NODE_ENV === 'production' ? PROD_API_URL : DEV_API_URL;
+        const response = await axios.get(apiUrl);
         setMessage(response.data.message);
         setError('');
       } catch (err) {
