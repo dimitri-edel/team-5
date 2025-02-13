@@ -4,7 +4,9 @@ export default function Logout() {
     return (
         <div>
              <PageNavigation />
-            <h1>Logout page</h1>
+            <h3>You sure you want to logout?</h3>
+            <button>Back</button>
+            <button>Confirm</button>
         </div>
     )
 }
