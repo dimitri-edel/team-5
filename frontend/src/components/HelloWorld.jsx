@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const PROD_API_URL = 'https://team5-api-eu-5d24fa110c36.herokuapp.com/';
+const PROD_API_URL = 'https://team5-api-eu-5d24fa110c36.herokuapp.com/api/';
 const DEV_API_URL = 'http://127.0.0.1:8000/api/';
 
 export function HelloWorld() {
@@ -13,15 +13,22 @@ export function HelloWorld() {
   useEffect(() => {
     const fetchMessage = async () => {
       try {
-        // Use the development URL by default
         const apiUrl = process.env.NODE_ENV === 'production' ? PROD_API_URL : DEV_API_URL;
+        console.log('Current environment:', process.env.NODE_ENV);
+        console.log('Using API URL:', apiUrl);
         const response = await axios.get(apiUrl);
+        console.log('API Response:', response.data);
         setMessage(response.data.message);
         setError('');
       } catch (err) {
-        setError('Failed to fetch message from API');
+        console.error('API Error Details:', {
+          message: err.message,
+          response: err.response?.data,
+          status: err.response?.status,
+          headers: err.response?.headers
+        });
+        setError(`Failed to fetch message from API: ${err.message}`);
         setMessage('');
-        console.error('API Error:', err);
       } finally {
         setLoading(false);
       }

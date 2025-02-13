@@ -22,3 +22,4 @@ urlpatterns = [
     path('api/', views.HelloWorld.as_view(), name='hello-world'),
     path('admin/', admin.site.urls),
 ]
+
