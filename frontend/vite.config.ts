@@ -10,12 +10,15 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: ['./src/setupTests.ts'],
   },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+  },
   server: {
     proxy: {
       '/api': {
-        target: 'https://team5-api-eu-5d24fa110c36.herokuapp.com',
+        target: process.env.VITE_API_URL || 'http://localhost:8000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },
