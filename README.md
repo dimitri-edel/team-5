@@ -27,24 +27,12 @@ erDiagram
         string bio
         string avatar_url
     }
-    PublicChatRoom {
-        int room_id PK
-        string room_name
-        datetime created_at
-    }
     PrivateChatRoom {
         int room_id PK
         int user1_id FK
         int user2_id FK
         datetime created_at
-    }
-    PublicMessage {
-        int message_id PK
-        int user_id FK
-        int room_id FK
-        string message_text
-        datetime sent_at
-    }
+    }    
     PrivateMessage {
         int message_id PK
         int user_id FK
@@ -63,8 +51,6 @@ erDiagram
     User ||--o{ UserProfile : has
     User ||--o{ PublicMessage : sends
     User ||--o{ PrivateMessage : sends
-    PublicChatRoom ||--o{ PublicMessage : contains
     PrivateChatRoom ||--o{ PrivateMessage : contains
-    PublicMessage ||--o{ File : may_have
     PrivateMessage ||--o{ File : may_have
    
