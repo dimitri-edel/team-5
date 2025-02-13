@@ -11,7 +11,7 @@ API endpoints:
 
 | Endpoint | Method | Expect | Result Dev | Result Prod |
 |----------|--------|---------|------------|-------------|
-| /api/    | GET    | Returns Hello World | ✅ | ❌ |
+| /api/    | GET    | Returns Hello World | ✅ | ✅  |
 
 FRONTEND TESTING:
 
