@@ -70,6 +70,7 @@ erDiagram
         int profile_id PK
         int user_id FK
         string display_name
+        int age
         boolean is_online
         text bio
         string avatar_url
