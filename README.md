@@ -70,6 +70,7 @@ erDiagram
         int profile_id PK
         int user_id FK
         string display_name
+        boolean is_online
         text bio
         string avatar_url
         string gender
@@ -105,7 +106,11 @@ erDiagram
         int user1_id FK
         int user2_id FK
         datetime matched_at
+        boolean blocked
+        int blocked_by FK
     }
+    %% blocked_by: user_id of the user who initiated the block
+    
     Likes {
         int like_id PK
         int liker_profile_id FK
