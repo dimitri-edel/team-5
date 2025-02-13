@@ -4,14 +4,14 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/static/',
+  base: '/',  // Serve from root since this will be a separate deployment
   test: {
     globals: true,
     environment: 'happy-dom',
     setupFiles: ['./src/setupTests.js'],
   },
   build: {
-    outDir: '../staticfiles',
+    outDir: 'dist',  // Build to local dist directory
     assetsDir: 'assets',
     manifest: true,
     rollupOptions: {
