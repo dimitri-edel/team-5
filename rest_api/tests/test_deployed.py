@@ -3,8 +3,7 @@ import requests
 
 class TestDeployedAPI(unittest.TestCase):
     def setUp(self):
-        # Replace with your actual deployed URL
-        self.base_url = "https://team-5-laurie-d3a9e5e7c277.herokuapp.com"
+        self.base_url = "https://team5-api-eu-5d24fa110c36.herokuapp.com"
     
     def test_hello_world_endpoint(self):
         """Test that the deployed /api endpoint returns Hello World"""
