@@ -1,3 +1,4 @@
+import React from 'react';
 import { describe, it, expect, beforeAll, afterAll, afterEach, beforeEach, vi } from 'vitest';
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { setupServer } from 'msw/node';
