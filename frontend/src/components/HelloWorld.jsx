@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const PROD_API_URL = 'https://team5-api-eu-5d24fa110c36.herokuapp.com/';
-const DEV_API_URL = '/api';
+const DEV_API_URL = 'http://127.0.0.1:8000/api/';
 
 export function HelloWorld() {
   const [message, setMessage] = useState('');
