@@ -4,10 +4,13 @@ import styles from './PageNavigation.module.css'
 export default  function PageNavigation() {
     return (
         <nav className={styles.nav}>
-           <Link to="/" >Home Page</Link>
-           <Link to="/signup">Sign up</Link>
-           <Link to="/login">Log in</Link>
-           <Link to="/logout">Log out</Link>
+            <ul>
+                <li><Link to="/"> Home  </Link></li>
+                <li><Link to="/signup">SignUp</Link></li>
+                <li> <Link to="/login">SignIn</Link></li>
+                <li><Link to="/logout">Log out</Link></li>
+            </ul>
+          
         </nav>
     )
 }
