@@ -43,7 +43,7 @@ describe('HelloWorld Component in Development', () => {
   it('should display the hello world message from API', async () => {
     render(<HelloWorld />);
     await waitForElementToBeRemoved(() => screen.getByTestId('loading'));
-    const messageElement = screen.getByTestId('message');
+    const messageElement = screen.getByTestId('hello-world');
     expect(messageElement).toBeInTheDocument();
     expect(messageElement.textContent).toBe('Hello, World!');
   });
@@ -79,7 +79,7 @@ describe('HelloWorld Component in Production', () => {
   it('should display the hello world message from production API', async () => {
     render(<HelloWorld />);
     await waitForElementToBeRemoved(() => screen.getByTestId('loading'));
-    const messageElement = screen.getByTestId('message');
+    const messageElement = screen.getByTestId('hello-world');
     expect(messageElement).toBeInTheDocument();
     expect(messageElement.textContent).toBe('Hello, World!');
   });

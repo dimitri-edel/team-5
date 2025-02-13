@@ -38,5 +38,5 @@ export function HelloWorld() {
     return <div data-testid="error" className="error">{error}</div>;
   }
 
-  return <div data-testid="message">{message}</div>;
+  return <div data-testid="hello-world">{message}</div>;
 } 
