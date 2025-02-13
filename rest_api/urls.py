@@ -16,12 +16,9 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
 from rest_api import views
 
 urlpatterns = [
-    path('', views.HelloWorld.as_view()),
+    path('', views.HelloWorld.as_view(), name='hello-world'),
     path('admin/', admin.site.urls),
-    path('students/', views.Students.as_view()),
-    url(r'^students/(?P<id>[0-9]+)$', views.StudentInstance.as_view()),
 ]
