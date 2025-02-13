@@ -15,10 +15,13 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+from django.views.generic import TemplateView
 from rest_api import views
 
 urlpatterns = [
     path('api/', views.HelloWorld.as_view(), name='hello-world'),
     path('admin/', admin.site.urls),
+    # Serve frontend's index.html for all other routes
+    re_path(r'^(?!api/).*$', TemplateView.as_view(template_name='index.html')),
 ]

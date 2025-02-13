@@ -133,19 +133,24 @@ ALLOWED_HOSTS = ['*']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'dist'),
-    os.path.join(PROJECT_ROOT, 'static'),
+    os.path.join(BASE_DIR, 'frontend/dist'),
 ]
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Activate Django-Heroku.
+# Configure CORS to allow frontend requests
+CORS_ALLOW_ALL_ORIGINS = True  # Only for development, configure properly for production
+CORS_URLS_REGEX = r'^/api/.*$'
+
+# Configure Django app for Heroku deployment
 django_heroku.settings(locals())
+
+# Ensure STATIC_ROOT exists
+os.makedirs(STATIC_ROOT, exist_ok=True)
