@@ -71,5 +71,5 @@ erDiagram
     User ||--o{ PrivateMessage : sends
     PrivateChatRoom ||--o{ PrivateMessage : contains
     PrivateMessage ||--o{ File : may_have
-    UserProfile ||--o{ UserProfile : one_to_many
+    UserProfile ||--o{ Likes : one_to_many
     User ||--o{ Match : one_to_many
