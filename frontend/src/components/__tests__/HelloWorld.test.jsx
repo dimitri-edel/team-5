@@ -6,7 +6,7 @@ import { rest } from 'msw';
 import { HelloWorld } from '../HelloWorld';
 
 const PROD_API_URL = 'https://team5-api-eu-5d24fa110c36.herokuapp.com/';
-const DEV_API_URL = '/api';
+const DEV_API_URL = 'http://127.0.0.1:8000/api/';
 
 const server = setupServer();
 
