@@ -1,32 +1,32 @@
 import { test, expect } from '@playwright/test';
 
-test('API endpoint returns hello world message', async ({ request }) => {
+test('API endpoint returns hello world message in development', async ({ request }) => {
   // Test the API directly
-  const response = await request.get('https://team5-api-eu-5d24fa110c36.herokuapp.com/');
+  const response = await request.get('http://127.0.0.1:8000/api/');
   expect(response.ok()).toBeTruthy();
   const data = await response.json();
   expect(data.message).toBe('Hello, World!');
 });
 
-test('Frontend displays hello world message from API', async ({ page }) => {
+test('Frontend displays hello world message from API in development', async ({ page }) => {
   // Test the frontend application
-  await page.goto('https://team5-frontend-eu-f40f1bfc04e7.herokuapp.com/');
+  await page.goto('http://localhost:5173/');
   
   // Wait for loading state to disappear
   await page.waitForSelector('[data-testid="loading"]', { state: 'hidden' });
   
   // Check for the message
-  const messageElement = await page.getByTestId('message');
+  const messageElement = await page.getByTestId('hello-world');
   await expect(messageElement).toBeVisible();
   await expect(messageElement).toHaveText('Hello, World!');
 });
 
-test('Frontend handles API errors gracefully', async ({ page }) => {
+test('Frontend handles API errors gracefully in development', async ({ page }) => {
   // Mock the API to return an error
-  await page.route('**/api', route => route.abort());
+  await page.route('http://127.0.0.1:8000/api/', route => route.abort());
   
   // Visit the frontend
-  await page.goto('https://team5-frontend-eu-f40f1bfc04e7.herokuapp.com/');
+  await page.goto('http://localhost:5173/');
   
   // Wait for loading state to disappear
   await page.waitForSelector('[data-testid="loading"]', { state: 'hidden' });
