@@ -28,18 +28,19 @@ const mimeTypes = {
   '.wasm': 'application/wasm'
 };
 
-// Serve static files from the dist directory with proper MIME types
+// Serve static files from the dist directory
 app.use(express.static(path.join(__dirname, 'dist'), {
+  index: false, // Don't serve index.html for /
   setHeaders: (res, filePath) => {
     const ext = path.extname(filePath).toLowerCase();
     const contentType = mimeTypes[ext] || 'application/octet-stream';
     res.setHeader('Content-Type', contentType);
     
-    // Add cache control for assets
-    if (ext !== '.html') {
-      res.setHeader('Cache-Control', 'public, max-age=31536000');
-    } else {
+    // Set appropriate cache headers
+    if (filePath.endsWith('.html')) {
       res.setHeader('Cache-Control', 'no-cache');
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
     }
   }
 }));
@@ -53,7 +54,10 @@ app.use('/api', (req, res) => {
   // Forward the request to the API
   fetch(`${apiUrl}${req.url}`, {
     method: req.method,
-    headers: req.headers,
+    headers: {
+      ...req.headers,
+      host: new URL(apiUrl).host // Fix host header
+    },
     body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined
   })
   .then(apiRes => apiRes.json())
@@ -64,25 +68,33 @@ app.use('/api', (req, res) => {
   });
 });
 
-// Handle client-side routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+// Serve index.html for all other routes (SPA support)
+app.get('*', (req, res, next) => {
+  const indexPath = path.join(__dirname, 'dist', 'index.html');
+  res.sendFile(indexPath, err => {
+    if (err) {
+      console.error(`Error sending index.html: ${err.message}`);
+      next(err);
+    }
+  });
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+  console.error('Server error:', err.stack);
+  res.status(500).send('Something went wrong!');
 });
 
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Frontend server is running on port ${PORT}`);
+  console.log(`Serving static files from: ${path.join(__dirname, 'dist')}`);
 }).on('error', (err) => {
   if (err.code === 'EADDRINUSE') {
     console.error(`Port ${PORT} is already in use`);
     process.exit(1);
   } else {
     console.error('Server error:', err);
+    process.exit(1);
   }
 }); 
