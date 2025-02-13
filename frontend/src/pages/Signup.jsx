@@ -8,7 +8,7 @@ export default function Signup() {
             
 
             <form>
-                <h3>Have an account? <Link>Signin</Link></h3>
+                <h3>Have an account? <Link to="/login" >Signin</Link></h3>
                 
                 <label htmlFor="">Email</label>
                 <input type="text" placeholder="Start typing..." />

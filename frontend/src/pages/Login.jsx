@@ -6,7 +6,7 @@ export default function Login() {
         <div>
              <PageNavigation />
              <form>
-                <h3>Have no account? <Link>Sign Up</Link></h3>
+                <h3>Have no account? <Link to="/signup" >Sign Up</Link></h3>
                 
                 <label htmlFor="">Email</label>
                 <input type="text" placeholder="Start typing..." />
