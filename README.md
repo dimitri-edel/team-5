@@ -193,8 +193,6 @@ Click on [Results]() to view the performance.... To Do
     UserProfile ||--o{ Likes : one_to_many
     User ||--o{ Match : one_to_many
 
-```
-
 ### Algorithm for finding a match
 When user likes someone, check if the the other user likes them back
 
