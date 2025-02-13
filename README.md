@@ -24,8 +24,15 @@ erDiagram
         int profile_id PK
         int user_id FK
         string display_name
-        string bio
+        text bio
         string avatar_url
+        string gender
+        string sexual_orientation
+        string country
+        string city
+        json other_details
+        datetime created_at
+        datetime updated_at
     }
     PrivateChatRoom {
         int room_id PK
