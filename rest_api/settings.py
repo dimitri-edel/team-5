@@ -58,9 +58,13 @@ MIDDLEWARE = [
 ]
 
 # CORS settings - not needed anymore since we're serving from same origin
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = []
+CORS_ALLOWED_ORIGINS = [
+    "https://team5-api-eu-5d24fa110c36.herokuapp.com",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
 
 ROOT_URLCONF = 'rest_api.urls'
 
