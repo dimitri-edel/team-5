@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_api',
     'rest_framework',
     'corsheaders',
+    'channels',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -90,7 +92,19 @@ TEMPLATES = [
     },
 ]
 
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
+
 WSGI_APPLICATION = 'rest_api.wsgi.application'
+ASGI_APPLICATION = 'rest_api.asgi.application'
 
 
 # Database
