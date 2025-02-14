@@ -47,6 +47,18 @@ INSTALLED_APPS = [
     'chat',
 ]
 
+ASGI_APPLICATION = 'rest_api.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.DatabaseChannelLayer',
+        'CONFIG': {
+            'capacity': 2 ** 20,  # Maximum number of channels
+            'expiry': 280,  # Message expiry in seconds
+        },
+    },
+}
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Add CORS middleware at the top
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -93,18 +105,9 @@ TEMPLATES = [
 ]
 
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}
-
 
 WSGI_APPLICATION = 'rest_api.wsgi.application'
-ASGI_APPLICATION = 'rest_api.asgi.application'
+
 
 
 # Database
