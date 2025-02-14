@@ -1,1 +1,2 @@
-web: python manage.py collectstatic --no-input && gunicorn rest_api.wsgi --log-level debug
+web: cd frontend; npm install; npm run build; npx serve dist -s -l $PORT --single
+api: gunicorn rest_api.wsgi:application --log-file -

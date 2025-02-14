@@ -1,0 +1,20 @@
+{
+  "name": "team5-api",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "heroku-postbuild": "cd frontend && npm install && npm run build",
+    "start-frontend": "cd frontend && npm start"
+  },
+  "dependencies": {
+    "vite": "^5.0.8",
+    "@vitejs/plugin-react": "^4.2.1",
+    "express": "^4.21.2"
+  },
+  "cacheDirectories": [
+    "frontend/node_modules"
+  ]
+} 
