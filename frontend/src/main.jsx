@@ -1,4 +1,3 @@
-
 import './index.css'
 import App from './App.jsx'
 import { AuthProvider } from './context/authProvider'

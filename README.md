@@ -70,6 +70,7 @@ erDiagram
         int profile_id PK
         int user_id FK
         string display_name
+        int age
         boolean is_online
         text bio
         string avatar_url
@@ -93,14 +94,8 @@ erDiagram
         int room_id FK
         string message_text
         datetime sent_at
-    }
-    File {
-        int file_id PK
-        string file_name
-        string file_type
-        string file_url
-        datetime uploaded_at
-    }    
+        file attachment 
+    }   
     Match {
         int match_id PK
         int user1_id FK
@@ -121,7 +116,8 @@ erDiagram
     User ||--o{ UserProfile : has
     User ||--o{ PrivateMessage : sends
     PrivateChatRoom ||--o{ PrivateMessage : contains
-    PrivateMessage ||--o{ File : may_have
+    UserProfile ||--o{ Likes : one_to_many
+    UserProfile ||--o{ Match : many_to_many
 ```
 
 
@@ -192,8 +188,6 @@ Click on [Results]() to view the performance.... To Do
 =======
     UserProfile ||--o{ Likes : one_to_many
     User ||--o{ Match : one_to_many
-
-```
 
 ### Algorithm for finding a match
 When user likes someone, check if the the other user likes them back
