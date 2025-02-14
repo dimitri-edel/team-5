@@ -101,9 +101,17 @@ erDiagram
         datetime liked_at
     }
 
+    Dislikes {
+        int dislike_id PK
+        int liker_profile_id FK
+        int liked_profile_id FK
+        datetime liked_at
+    }
+
     User ||--o{ UserProfile : has
     User ||--o{ PrivateMessage : sends
     UserProfile ||--o{ Likes : one_to_many
+     UserProfile ||--o{ Dislikes : one_to_many
     UserProfile ||--o{ Match : many_to_many   
 ```
 
