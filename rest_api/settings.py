@@ -43,8 +43,23 @@ INSTALLED_APPS = [
     'rest_api',
     'rest_framework',
     'corsheaders',
+    'channels',
+    'chat',
     'user_profile',
 ]
+
+ASGI_APPLICATION = 'rest_api.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.DatabaseChannelLayer',
+        'CONFIG': {
+            'capacity': 2 ** 20,  # Maximum number of channels
+            'expiry': 280,  # Message expiry in seconds
+        },
+    },
+}
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Add CORS middleware at the top
@@ -91,7 +106,10 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'rest_api.wsgi.application'
+
 
 
 # Database
