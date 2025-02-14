@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'channels',
     'chat',
+    'user_profile',
 ]
 
 ASGI_APPLICATION = 'rest_api.asgi.application'
@@ -58,6 +59,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Add CORS middleware at the top
