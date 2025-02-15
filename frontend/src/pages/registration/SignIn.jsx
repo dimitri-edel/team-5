@@ -1,32 +1,28 @@
-import { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useRef, useState, useEffect, useContext } from 'react';
+import AuthContext from "./context/AuthProvider";
+import axios from './api/axios';
+
 
 // To Do ... Once the Backend is ready
 //const LOGIN_URL = '/auth';
 
-const SignIn = () => {
+const signIn = () => {
+    const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
-    const [userEmail, setUserEmail] = useState('');
-    const [pwd, setPwd] = useState('');
-    const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
-
-    useEffect(() => {
-        userRef.current.focus();
-    }, [])
+	@@ -22,24 +19,21 @@ const signIn = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [userEmail, pwd])
+    }, [user, pwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
        /*
         try {
             const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ userEmail, pwd }),
+                JSON.stringify({ user, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -34,31 +30,17 @@ const SignIn = () => {
             );
             console.log(JSON.stringify(response?.data));
             
+            const accessToken = response?.data?.accessToken;
+            const roles = response?.data?.roles;
+            setAuth({ userEmail, pwd, roles, accessToken });
             setUserEmail('');
             setPwd('');
             setSuccess(true);
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                setErrMsg('Missing UserEmail or Password');
-            } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
-            } else {
-                setErrMsg('Login Failed');
-            }
-            errRef.current.focus();
-        }*/
-    }
-
-    return (
-        <>
-            {success ? (
-                <section>
+	@@ -64,7 +58,7 @@ const signIn = () => {
                     <h1>You are logged in!</h1>
                     <br />
                     <p>
-                        <Link to="/">Go to Home</Link>
+                        <a href="#">Go to Home</a>
                     </p>
                 </section>
             ) : (
@@ -76,7 +58,6 @@ const SignIn = () => {
                             value={userEmail}
                             required
                         />
-
                         <label htmlFor="password">Password:</label>
                         <input
                             type="password"
@@ -90,7 +71,8 @@ const SignIn = () => {
                     <p>
                         Need an Account?<br />
                         <span className="line">
-                            <Link to="/signup">Sign Up</Link>
+                            {/*put router link here*/}
+                            <a href="#">Sign Up</a>
                         </span>
                     </p>
                 </section>
@@ -99,4 +81,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+export default signIn
