@@ -1,11 +1,8 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from "./context/AuthProvider";
 import axios from './api/axios';
-
-
 // To Do ... Once the Backend is ready
 //const LOGIN_URL = '/auth';
-
 const signIn = () => {
     const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
@@ -23,7 +20,6 @@ const signIn = () => {
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd])
-
     const handleSubmit = async (e) => {
         e.preventDefault();
        /*
@@ -106,4 +102,4 @@ const signIn = () => {
     )
 }
 
-export default signIn
+export default SignIn;

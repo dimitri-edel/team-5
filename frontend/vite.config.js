@@ -10,6 +10,13 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: ['./src/setupTests.js'],
   },
+  preview: {
+    allowedHosts: [
+      'team5-api-eu-5d24fa110c36.herokuapp.com',
+      'team5-api-eu-5d24fa110c36-a80e73224403.herokuapp.com',
+      '.herokuapp.com'
+    ],
+  },
   build: {
     outDir: 'dist',  // Build to local dist directory
     assetsDir: 'assets',

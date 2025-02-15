@@ -22,6 +22,6 @@ from django.urls import path
 from rest_api import views
 
 urlpatterns = [
-    path('api/', views.HelloWorld.as_view(), name='hello-world'),
+    path('', views.HelloWorld.as_view(), name='hello-world'),
     path('admin/', admin.site.urls),
 ]
