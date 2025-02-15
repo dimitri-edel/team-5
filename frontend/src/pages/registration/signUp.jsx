@@ -3,13 +3,13 @@ import { Link} from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import styles from "../../styles/signUpInForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
+import btnStyles from "../../styles/button.module.css";
 import appStyles from "../../App.module.css";
 import {
-    Form,
-    Button,
-    Container,
-    Alert,
+    Form,
+    Button,
+    Container,
+    Alert,
 } from "react-bootstrap";
 const SignUp = () => {
     const [signUpData, setSignUpData] = useState({
@@ -111,5 +111,7 @@ const SignUp = () => {
      </Container>
         
     );
+
 };
-export default SignUp;
+
+export default SignUpForm;
