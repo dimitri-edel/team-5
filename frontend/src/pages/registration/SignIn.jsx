@@ -6,7 +6,7 @@ import axios from './api/axios';
 // To Do ... Once the Backend is ready
 //const LOGIN_URL = '/auth';
 
-const signIn = () => {
+const SignIn = () => {
     const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
@@ -106,4 +106,4 @@ const signIn = () => {
     )
 }
 
-export default signIn
+export default SignIn
