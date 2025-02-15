@@ -1,10 +1,12 @@
 
 import React from "react";
 import styles from "./App.module.css";
-import { Navbar, Container } from "react-bootstrap";
+import Container  from "react-bootstrap/Container";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignUp from "./pages/registration/SignUp";
 import SignIn from "./pages/registration/SignIn";
+import AboutPage from "./pages/about";
+import NavBar from "./components/navbar";
 import "./App.css";
 
 function App() {
