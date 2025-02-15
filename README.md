@@ -33,7 +33,10 @@ Our team addressed these applicable criteria:
 
 * As a user, I want to be able to .... so i can ......
 
+## Postponed till next Iteration
+The initial goal was to implement a live private messaging system using **Channels** and Websockets. The idea got discarded due to complexity, that would jeopardize the goal of dilivering before the dead line. 
 
+This feature can be implemented in the next iteration, though. 
 
 ## UX 
 ### Colors
@@ -96,22 +99,21 @@ erDiagram
     
     Likes {
         int like_id PK
-        int liker_profile_id FK
-        int liked_profile_id FK
+        int source_profile_id FK
+        int target_profile_id FK
         datetime liked_at
     }
 
     Dislikes {
         int dislike_id PK
-        int liker_profile_id FK
-        int liked_profile_id FK
+        int source_profile_id FK
+        int target_profile_id FK
         datetime liked_at
     }
 
     User ||--o{ UserProfile : has
-    User ||--o{ PrivateMessage : sends
     UserProfile ||--o{ Likes : one_to_many
-     UserProfile ||--o{ Dislikes : one_to_many
+    UserProfile ||--o{ Dislikes : one_to_many
     UserProfile ||--o{ Match : many_to_many   
 ```
 
