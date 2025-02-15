@@ -1,0 +1,129 @@
+.NavBar{
+    background-color: #CBEEF3;
+    border: solid 1px #F49CBB;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px #880D1E;
+    height: 2rem;
+    }
+
+    .NavLink {
+        padding: 5px 10px;
+        font-size: 14px;
+        color: #880D1E;
+      }
+
+    .NavLink i {
+    padding: 5px 10px;
+    font-size: 24px;
+    }
+
+
+    .Active i {
+    color: #880D1E;
+    }
+
+
+
+    @media screen and (max-width: 400px) {
+    img {
+        height: 40px;
+    }
+    .NavBar{
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    .Container{
+        background-color: #ffffff;
+    }
+    }
+
+    @media screen and (max-width: 414px) {
+        img {
+            height: 50px;
+        }
+        .NavBar{
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+    }
+
+    @media screen and (max-width: 596px) {
+        img {
+            height: 70px;
+        }
+        .NavBar{
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+    }
+
+    @media screen and (max-width: 820px) {
+        img {
+            height: 80px;
+        }
+        .NavBar{
+            margin-left: 1rem;
+            margin-right: 1rem;
+
+        }
+        .NavLink {
+            padding: 3px 5px;
+            font-size: 10px;
+          }
+
+          .NavLink i {
+            padding: 3px 5px;
+            font-size: 18px;
+          }
+    }
+
+    @media screen and (max-width: 912px) {
+
+        .NavBar{
+            margin-left: 2rem;
+            margin-right: 2rem;
+        }
+        .NavLink {
+            padding: 4px 4px;
+            font-size: 20px;
+          }
+
+          .NavLink i {
+            padding: 7px 20px;
+            font-size: 18px;
+          }
+    }
+    @media screen and (max-width: 912px){
+        .NavLink {
+            padding: 4px 4px;
+            font-size: 15px;
+          }
+          .NavBar{
+            height: 10rem;
+            margin-left: 0;
+            margin-right: 0;
+          }
+    }
+
+    @media screen and (max-width: 1024px){
+        .NavBar{
+            margin-left: 2rem;
+            margin-right: 2rem;
+          }
+          .NavLink {
+            padding: 1px 1px;
+            font-size: 15px;
+          }
+    }
+
+    @media screen and (max-width: 1280px){
+        .NavBar{
+            margin-left: 5px;
+            margin-right: 5px;
+          }
+    }

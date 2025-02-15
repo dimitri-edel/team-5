@@ -1,3 +1,4 @@
+
 import React from "react";
 import styles from "./App.module.css";
 import { Navbar, Container } from "react-bootstrap";
@@ -7,24 +8,23 @@ import SignIn from "./pages/registration/SignIn";
 import "./App.css";
 
 function App() {
-  return (
-    <Router>
-      <div className={styles.App}>
-        <Navbar bg="dark" variant="dark">
-          <Container>
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          </Container>
-        </Navbar>
-        <Container className={styles.Main}>
-          <Routes>
-            <Route path="/" element={<SignIn />} />
-            <Route path="/signIn" element={<SignIn />} />
-            <Route path="/signUp" element={<SignUp />} />
-          </Routes>
+
+  return (
+    <div className={styles.App}>
+       <NavBar/>
+        <Container className={styles.Main}>
+            <Routes>
+                <Route path="/SignIn" element={<SignIn />} />
+                <Route path="/SignUp" element={<SignUp />} />
+                <Route path="/AboutPage" element={<AboutPage />} />
+            </Routes>   
         </Container>
-      </div>
-    </Router>
-  );
+        
+    </div>
+ 
+);
 }
+
+
 
 export default App;
