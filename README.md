@@ -78,24 +78,12 @@ erDiagram
         string sexual_orientation
         string country
         string city
+        string contact
+        string intrests
         json other_details
         datetime created_at
         datetime updated_at
     }
-    PrivateChatRoom {
-        int room_id PK
-        int user1_id FK
-        int user2_id FK
-        datetime created_at
-    }    
-    PrivateMessage {
-        int message_id PK
-        int user_id FK
-        int room_id FK
-        string message_text
-        datetime sent_at
-        file attachment 
-    }   
     Match {
         int match_id PK
         int user1_id FK
@@ -113,11 +101,18 @@ erDiagram
         datetime liked_at
     }
 
+    Dislikes {
+        int dislike_id PK
+        int liker_profile_id FK
+        int liked_profile_id FK
+        datetime liked_at
+    }
+
     User ||--o{ UserProfile : has
     User ||--o{ PrivateMessage : sends
-    PrivateChatRoom ||--o{ PrivateMessage : contains
     UserProfile ||--o{ Likes : one_to_many
-    UserProfile ||--o{ Match : many_to_many
+     UserProfile ||--o{ Dislikes : one_to_many
+    UserProfile ||--o{ Match : many_to_many   
 ```
 
 

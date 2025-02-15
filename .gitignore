@@ -6,3 +6,7 @@ staticfiles/*
 test-results/*
 node_modules/*
 venv/*
+env.py
+*.idea/
+
+

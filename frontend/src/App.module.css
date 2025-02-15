@@ -1,5 +1,12 @@
 
-
+.App{
+    font-family: 'Gluten', cursive;
+    background-color: #CBEEF3;
+    min-height: 100vh;
+}
+.Main{
+    padding-top: 12em;
+}
 
 .SignInUpContainer{
     width: 70%;

@@ -10,11 +10,12 @@
     "start-frontend": "cd frontend && npm start"
   },
   "dependencies": {
-    "vite": "^5.0.8",
     "@vitejs/plugin-react": "^4.2.1",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "team5-api": "file:",
+    "vite": "^5.0.8"
   },
   "cacheDirectories": [
     "frontend/node_modules"
   ]
-} 
+}
