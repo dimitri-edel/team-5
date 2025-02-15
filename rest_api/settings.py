@@ -95,7 +95,7 @@ ROOT_URLCONF = 'rest_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # Remove frontend/dist
+        'DIRS': [os.path.join(BASE_DIR, 'frontend', 'dist')],  # Remove frontend/dist
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,7 +104,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'debug': False,  # Set to False in production
+            'debug': DEBUG,  # Set to False in production
         },
     },
 ]
