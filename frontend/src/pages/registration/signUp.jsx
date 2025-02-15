@@ -35,9 +35,8 @@ const SignUp = () => {
         }
     };
     return (
-        <Row className={styles.Row}>
-            <Col className="my-auto py-2 p-md-2" lg={6}>
-                <Container className={`${appStyles.SignInUpContainer} p-4 `}>
+    <Container className={`${appStyles.SignInUpContainer} `}>
+        <Row className={styles.Row}>
                     <h1 className={styles.Header}>sign up</h1>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="userEmail">
@@ -99,15 +98,18 @@ const SignUp = () => {
                                 {message}
                             </Alert>
                         ))}
-                    </Form>
-                </Container>
-                <Container className={`mt-3 ${appStyles.SignInUpContainer}`}>
+                    </Form>                
+                
                     <Link className={styles.Link} to="/signin">
                         Already have an account? <span>Sign in</span>
                     </Link>
-                </Container>
-            </Col>
+                
         </Row>
+        <Row>
+            
+        </Row>
+     </Container>
+        
     );
 };
 export default SignUp;
