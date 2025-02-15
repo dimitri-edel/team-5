@@ -7,4 +7,4 @@ test-results/*
 node_modules/*
 venv/*
 *.idea/
-
+*.DS_Store/
