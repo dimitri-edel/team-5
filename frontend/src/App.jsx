@@ -3,7 +3,7 @@ import NavBar from './components/NavBar';
 import Container from 'react-bootstrap/Container';
 import { Route, Routes } from "react-router-dom"
 import  SignIn from './pages/registration/signIn';
-import SignUp from './pages/registration/signUp';
+import Register from './pages/registration/register';
 import AboutPage from './pages/about'
 import './App.css';
 

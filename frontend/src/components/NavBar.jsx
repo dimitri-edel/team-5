@@ -44,7 +44,7 @@ const NavBar = () => {
                             exact
                             className={styles.NavLink}
                             activeClassName={styles.Active}
-                            to="/SignUp"
+                            to="/Register"
                         >
                             <i className="fas fa-info"></i>Sign Up
                         </NavLink>
