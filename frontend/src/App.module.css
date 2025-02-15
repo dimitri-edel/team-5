@@ -1,11 +1,22 @@
 
-
+.App{
+    font-family: 'Gluten', cursive;
+    min-height: 100vh;
+}
+.Main{
+    padding-top: 1em;
+}
 
 .SignInUpContainer{
-    width: 70%;
+    width: max-content;
     background-color: #CBEEF3;
     padding: 10px;
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     border: 1px solid #F49CBB;
     box-shadow: 0 2px 4px #F26A8D;
 }
+.FillerImage {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    }

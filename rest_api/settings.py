@@ -13,6 +13,10 @@ import os
 import dj_database_url
 import django_heroku
 
+
+if os.path.exists("rest_api/env.py"):
+    from .env import *
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -43,7 +47,23 @@ INSTALLED_APPS = [
     'rest_api',
     'rest_framework',
     'corsheaders',
+    'channels',
+    'chat',
+    'user_profile',
 ]
+
+ASGI_APPLICATION = 'rest_api.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.DatabaseChannelLayer',
+        'CONFIG': {
+            'capacity': 2 ** 20,  # Maximum number of channels
+            'expiry': 280,  # Message expiry in seconds
+        },
+    },
+}
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Add CORS middleware at the top
@@ -90,7 +110,10 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'rest_api.wsgi.application'
+
 
 
 # Database
@@ -98,8 +121,12 @@ WSGI_APPLICATION = 'rest_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ["DB_NAME"],
+        'USER': os.environ['DB_USERNAME'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ['DB_HOST'],
+        'PORT': os.environ['DB_PORT'],
     }
 }
 

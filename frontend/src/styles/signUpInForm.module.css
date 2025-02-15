@@ -1,4 +1,4 @@
-.Row {
+ .Row {
     height: calc(100vh - 81px);
   }
   .Input {    
@@ -9,6 +9,11 @@
     color: var(--clr-green-light);
     text-align: center;
     padding: 10px;
+  }
+
+  body {
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
   }
   
   .Header {
