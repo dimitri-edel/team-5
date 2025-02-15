@@ -120,14 +120,10 @@ WSGI_APPLICATION = 'rest_api.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["DB_NAME"],
-        'USER': os.environ['DB_USERNAME'],
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': os.environ['DB_HOST'],
-        'PORT': os.environ['DB_PORT'],
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'),
+        conn_max_age=600
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
