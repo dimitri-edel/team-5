@@ -1,13 +1,10 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from "./context/AuthProvider";
-import axios from './api/axios';
-
+import { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // To Do ... Once the Backend is ready
 //const LOGIN_URL = '/auth';
 
 const SignIn = () => {
-    const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
@@ -22,14 +19,14 @@ const SignIn = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd])
+    }, [userEmail, pwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
        /*
         try {
             const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ user, pwd }),
+                JSON.stringify({ userEmail, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -37,9 +34,6 @@ const SignIn = () => {
             );
             console.log(JSON.stringify(response?.data));
             
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({ userEmail, pwd, roles, accessToken });
             setUserEmail('');
             setPwd('');
             setSuccess(true);
@@ -64,7 +58,7 @@ const SignIn = () => {
                     <h1>You are logged in!</h1>
                     <br />
                     <p>
-                        <a href="#">Go to Home</a>
+                        <Link to="/">Go to Home</Link>
                     </p>
                 </section>
             ) : (
@@ -96,8 +90,7 @@ const SignIn = () => {
                     <p>
                         Need an Account?<br />
                         <span className="line">
-                            {/*put router link here*/}
-                            <a href="#">Sign Up</a>
+                            <Link to="/signup">Sign Up</Link>
                         </span>
                     </p>
                 </section>
