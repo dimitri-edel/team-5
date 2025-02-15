@@ -13,6 +13,9 @@ import os
 import dj_database_url
 import django_heroku
 
+from dotenv import load_dotenv
+load_dotenv()
+
 
 if os.path.exists("rest_api/env.py"):
     from .env import *
@@ -77,6 +80,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 # CORS settings for API access
@@ -124,13 +128,30 @@ WSGI_APPLICATION = 'rest_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["DB_NAME"],
-        'USER': os.environ['DB_USERNAME'],
+        'DB_NAME': os.environ['DB_NAME'],
+        'DB_USERNAME': os.environ['DB_USERNAME'],
         'PASSWORD': os.environ['DB_PASSWORD'],
         'HOST': os.environ['DB_HOST'],
         'PORT': os.environ['DB_PORT'],
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Default Django auth
+    'allauth.account.auth_backends.AuthenticationBackend',  # Allauth backend
+]
+
+SITE_ID = 1  # Required for allauth
+
+# Redirect URLs
+LOGIN_REDIRECT_URL = '/'  # Redirect after login
+LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
+
+# Account settings
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Options: 'mandatory', 'optional', 'none'
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -174,3 +195,4 @@ django_heroku.settings(locals())
 
 # Ensure STATIC_ROOT exists
 os.makedirs(STATIC_ROOT, exist_ok=True)
+
