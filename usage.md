@@ -20,8 +20,8 @@ heroku git:remote -a team5-api-eu
 deployment is handled separately for the api and the frontend, although they are in the same repository and sent to the same heroku app in `/api` and `/` respectively.
 
 ```bash
-git push heroku-api main # for the api
-git push heroku main # for the frontend
+# Single deployment command for both frontend and API
+git push heroku main
 ```
 
 heroku logs can be used to view the logs of the deployed application.

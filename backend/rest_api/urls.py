@@ -12,6 +12,9 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+
+
+    IMPORTANT: urls.py should not handle static files.
 """
 
 from django.contrib import admin
@@ -19,7 +22,6 @@ from django.urls import path
 from rest_api import views
 
 urlpatterns = [
-    path('api/', views.HelloWorld.as_view(), name='hello-world'),
+    path('', views.HelloWorld.as_view(), name='hello-world'),
     path('admin/', admin.site.urls),
 ]
-

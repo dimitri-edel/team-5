@@ -14,8 +14,12 @@ API endpoints:
 
 | Endpoint | Method | Expect | Result Dev | Result Prod |
 |----------|--------|---------|------------|-------------|
-| /api/    | GET    | Returns Hello World | ✅ | ✅  |
+| /api/    | GET    | Returns Hello World | ✅ | ❌  |
 
 FRONTEND TESTING:
+| Endpoint | Method | Expect | Result Dev | Result Prod |
+|----------|--------|---------|------------|-------------|
+| /        | GET    | Returns Hello World in frontend React Portal | ✅ | ✅ |
 
-| /        | GET    | Returns Hello World in frontend React Portal | ✅ | ❌ |
+
+❌* API PROD reveals the frontend. with the following console log outputs

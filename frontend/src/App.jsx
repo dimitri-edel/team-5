@@ -3,19 +3,26 @@ import NavBar from 'react-bootstrap';
 import Container from 'react-bootstrap';
 import Route from 'react-router-dom';
 import Switch from 'react-switch';
-import signUp from './pages/registration/signUp';
-import signIn from './pages/registration/signIn';
 import './App.css'
+import React from "react";
+import styles from "./App.module.css";
+import { Navbar, Container } from "react-bootstrap";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SignUp from "./pages/registration/SignUp";
+import SignIn from "./pages/registration/SignIn";
+import "./App.css";
+
 function App() {
   return (
     <div className={styles.App}>
        <NavBar/>
         <Container className={styles.Main}>
-            <Switch>
-                <Route exact path='/signIn' render={() => <signIn />} />
-                <Route exact path='/signUp' render={() => <signUp />} />       
-            </Switch>
-        </Container>
+            <Routes>
+                <Route path="/SignIn" element={<SignIn />} />
+                <Route path="/SignUp" element={<SignUp />} />
+                <Route path="/AboutPage" element={<AboutPage />} />
+            </Routes>   
+        </Container>
         
     </div>
     /*<div className="app">
@@ -24,4 +31,6 @@ function App() {
     </div>*/
 );
 }
+
+
 export default App;

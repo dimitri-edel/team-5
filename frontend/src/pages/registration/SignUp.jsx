@@ -47,7 +47,7 @@ const SignUpForm = () => {
                 lg={6}
                 className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
             >
-                
+
             </Col>
             <Col className="my-auto py-2 p-md-2" lg={6}>
                 <Container className={`${appStyles.SignInUpContainer} p-4 `}>
