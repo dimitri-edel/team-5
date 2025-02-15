@@ -125,3 +125,12 @@ api: gunicorn rest_api.wsgi:application --bind 0.0.0.0:$PORT --log-file - --env 
 ```
 
 Rationale: Development uses `npm run dev` with Vite, so production should use Vite's preview server for consistency.
+
+### 6. Simplified Procfile to use only deploy API
+
+
+```
+web: gunicorn rest_api.wsgi:application --log-file -
+```
+
+Since there is issues with frontend overriding the API, we can just deploy the API without the frontend. The rationale is to determine that the api is not the issue.
