@@ -50,6 +50,8 @@ app.use('/api', (req, res) => {
   const apiUrl = process.env.NODE_ENV === 'production' 
     ? 'https://team5-api-eu-5d24fa110c36.herokuapp.com'  // Remove /api since it's already in the path
     : 'http://127.0.0.1:8000';
+
+  console.log(apiUrl);
   
   // Forward the request to the API
   fetch(`${apiUrl}${req.url}`, {
