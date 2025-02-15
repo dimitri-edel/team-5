@@ -1,22 +1,25 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from "./context/AuthProvider";
 import axios from './api/axios';
-
-
 // To Do ... Once the Backend is ready
 //const LOGIN_URL = '/auth';
-
 const signIn = () => {
     const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
-	@@ -22,24 +19,21 @@ const signIn = () => {
+    const [userEmail, setUserEmail] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
 
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd])
-
     const handleSubmit = async (e) => {
         e.preventDefault();
        /*
@@ -36,7 +39,24 @@ const signIn = () => {
             setUserEmail('');
             setPwd('');
             setSuccess(true);
-	@@ -64,7 +58,7 @@ const signIn = () => {
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing UserEmail or Password');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {
+                setErrMsg('Login Failed');
+            }
+            errRef.current.focus();
+        }*/
+    }
+
+    return (
+        <>
+            {success ? (
+                <section>
                     <h1>You are logged in!</h1>
                     <br />
                     <p>
@@ -58,6 +78,7 @@ const signIn = () => {
                             value={userEmail}
                             required
                         />
+
                         <label htmlFor="password">Password:</label>
                         <input
                             type="password"
@@ -81,4 +102,4 @@ const signIn = () => {
     )
 }
 
-export default signIn
+export default SignIn;
