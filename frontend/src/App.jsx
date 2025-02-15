@@ -1,27 +1,29 @@
+import React from "react";
 import styles from "./App.module.css";
-import NavBar from "react-bootstrap";
-import Container from "react-bootstrap";
-import Route from "react-router-dom";
-import Switch from "react-switch";
-import signUp from "./pages/registration/signUp";
-import signIn from "./pages/registration/signIn";
+import { Navbar, Container } from "react-bootstrap";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SignUp from "./pages/registration/SignUp";
+import SignIn from "./pages/registration/SignIn";
 import "./App.css";
 
 function App() {
   return (
-    <div className={styles.App}>
-      <NavBar />
-      <Container className={styles.Main}>
-        <Switch>
-          <Route exact path="/signIn" render={() => <signIn />} />
-          <Route exact path="/signUp" render={() => <signUp />} />
-        </Switch>
-      </Container>
-    </div>
-    /*<div className="app">
-      <h1>Team 5 API Demo</h1>
-      <HelloWorld />
-    </div>*/
+    <Router>
+      <div className={styles.App}>
+        <Navbar bg="dark" variant="dark">
+          <Container>
+            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          </Container>
+        </Navbar>
+        <Container className={styles.Main}>
+          <Routes>
+            <Route path="/" element={<SignIn />} />
+            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/signUp" element={<SignUp />} />
+          </Routes>
+        </Container>
+      </div>
+    </Router>
   );
 }
 
