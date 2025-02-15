@@ -48,8 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'channels',
-    'chat',
-    'user_profile',
+    
 ]
 
 ASGI_APPLICATION = 'rest_api.asgi.application'
