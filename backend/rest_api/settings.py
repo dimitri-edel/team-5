@@ -29,7 +29,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-test-key-do-not-use-in-production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # Force DEBUG to True for detailed error information
+DEBUG = False  # Set to False in production
 
 # Application definition
 
@@ -48,8 +48,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'channels',
+<<<<<<< HEAD:rest_api/settings.py
     'chat',
     'user_profile',
+=======
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    
+>>>>>>> d6c7b66bdf237225d723e17f22da09cc3dc792e2:backend/rest_api/settings.py
 ]
 
 ASGI_APPLICATION = 'rest_api.asgi.application'
@@ -75,6 +82,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',  
 ]
 
 # CORS settings for API access
@@ -96,7 +104,7 @@ ROOT_URLCONF = 'rest_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend', 'dist')],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend', 'dist')],  # Remove frontend/dist
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,7 +113,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'debug': DEBUG,
+            'debug': DEBUG,  # Set to False in production
         },
     },
 ]
