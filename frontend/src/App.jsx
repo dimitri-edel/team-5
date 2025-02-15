@@ -5,7 +5,7 @@ import Container  from "react-bootstrap/Container";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignUp from "./pages/registration/SignUp";
 import SignIn from "./pages/registration/SignIn";
-import AboutPage from "./pages/AboutPage";
+import AboutPage from "./pages/About";
 import NavBar from "./components/navbar";
 import "./App.css";
 
