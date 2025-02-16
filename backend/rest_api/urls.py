@@ -18,7 +18,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from rest_api import views
 from django.conf.urls import handler404, handler500
 from django.views.generic import RedirectView
@@ -27,6 +27,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='test/', permanent=False), name='index'),
     path('test/', views.APITest.as_view(), name='api-test'),
     path('admin/', admin.site.urls),
+    path('api/', include('rest_api.user_profile.urls')),
 ]
 
 handler404 = 'rest_api.views.custom_error_404'
