@@ -20,8 +20,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_api import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('test/', views.HelloWorld.as_view(), name='hello-world'),
+    path('', RedirectView.as_view(url='test/', permanent=False), name='index'),
+    path('test/', views.APITest.as_view(), name='api-test'),
     path('admin/', admin.site.urls),
 ]
