@@ -1,6 +1,16 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from '../../context/authProvider';
 import axios from 'axios';
+import { Row } from 'react-bootstrap';
+import styles from "../../styles/signUpInForm.module.css";
+import btnStyles from "../../styles/Button.module.css";
+import appStyles from "../../App.module.css";
+import {
+    Form,
+    Button,
+    Container,
+    Alert,
+} from "react-bootstrap";
 // To Do ... Once the Backend is ready
 //const LOGIN_URL = '/auth';
 const SignIn = () => {
@@ -54,6 +64,9 @@ const SignIn = () => {
     }
 
     return (
+        <Container className={`${appStyles.SignInUpContainer} `}>
+        <Row className={styles.Row}>
+                    <h1 className={styles.Header}>sign up</h1>
         <>
             {success ? (
                 <section>
@@ -99,6 +112,8 @@ const SignIn = () => {
                 </section>
             )}
         </>
+        </Row>
+        </Container>
     )
 }
 
