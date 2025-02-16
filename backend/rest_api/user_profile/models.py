@@ -34,7 +34,7 @@ class UserProfile(models.Model):
         ],
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    sexual_orientation = models.CharField(max_length=50, blank=True)
+    sexual_orientation = models.CharField(max_length=50, choices=SEXUAL_ORIENTATION_CHOICES)
     country = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     contact = models.CharField(max_length=100, blank=True)
