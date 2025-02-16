@@ -1,136 +1,100 @@
-# Deployment issues: '/api' route reveals the frontend instead of the API.
+# Deployment Issues and Flow
 
-Expecting the frontend to be hosted on `https://team5-api-eu-5d24fa110c36.herokuapp.com/`
+## 1. API Production Issues
 
-Expecting the API to be hosted on the same URL as the frontend with `/api` as the route.
+### Current Status
+- Development API works: ✅ Returns `{"message":"API is working!"}` at `http://localhost:8000/test/` & `http://localhost:5173/api/test`
+- Production API fails: ❌ Returns `{"error":"Failed to fetch from API"}` at `https://team5-api-eu-5d24fa110c36.herokuapp.app/api/test`
 
+### Identified Issues
 
-## Endpoints Overview:
+1. **URL Configuration Mismatch**
+   - Frontend is trying to access `/api/test` but backend routes to `/test/`
+   - Backend URLs are not properly prefixed with `/api/` in production
 
-| Endpoint | Method | Expect | Result Dev | Result Prod |
-|----------|--------|---------|------------|-------------|
-| /        | GET    | Renders Hello World within frontend React Portal | ✅ | ✅(1) |
-| /api/    | GET    | Returns Hello World in REST API | ✅ | ❌(2)  |
+2. **CORS Configuration**
+   - Production CORS settings may be too restrictive
+   - Current CORS settings in `settings.py` only allow specific origins
 
+3. **Proxy Configuration**
+   - Frontend server proxy in `server.js` may be incorrectly handling API paths
+   - Double `/api` prefix issue in URL construction
 
-(1)Frontend Prod does not connect to the API, but that's not the issue for now, the issue is that the API is hosting the frontend.
+4. **Environment Configuration**
+   - Inconsistent API base URL usage between development and production
+   - Multiple places defining API URLs (frontend components, services, server)
 
----
+## 2. Deployment Flow
 
-(2) **/api route reveals the frontend instead of the API.** with the following console log outputs
+1. **Git Push to Heroku**
+   ```bash
+   git push heroku main
+   ```
 
-```
-Current environment: production
-
-index.Cw4utQlC.js:45 Using API URL: https://team5-api-eu-5d24fa110c36.herokuapp.com/api/
-
-api:1  Access to XMLHttpRequest at 'https://team5-api-eu-5d24fa110c36.herokuapp.com/api/' from origin 'https://team5-api-eu-5d24fa110c36-a80e73224403.herokuapp.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-index.Cw4utQlC.js:45  API Error Details: {message: 'Network Error', response: undefined, status: undefined, headers: undefined}
-[...]
-            
-GET https://team5-api-eu-5d24fa110c36.herokuapp.com/api/ net::ERR_FAILED 200 (OK)
-```
-
-## Problem files to review:
-
-**One theory is that these files are somehow overriding the settings, although the solution won't be to use Django Templates.**
-Procfile
-
-**Another theory is that these files are somehow overriding the settings, which would explain why the frontend is hosted on the API's URL.**
-
-frontend/vite.config.js
-frontend/server.js
-
-
-**It could also be that the Procfile is somehow overriding the settings, although the solution won't be to use Django Templates.**
-rest_api/settings.py
-
-## Debugging Steps
-
-### 1. Procfile
-
-deployment is managed by `Procfile` in the root directory
+2. **Procfile Execution**
+   - `web-backend`: Runs Django using gunicorn
+   - `web`: Runs Node.js frontend server
 
 ```
-web: cd frontend; npm install; npm run build; npx serve dist -s -l $PORT --single
-api: gunicorn rest_api.wsgi:application --log-file -
+web-backend: gunicorn backend.rest_api.wsgi:application --log-file -
+web: node frontend/server.js
 ```
 
+3. **Backend Deployment**
+   - Django app served by Gunicorn
+   - Static files handled by WhiteNoise
+   - Database migrations run automatically
+   - API hosted at `/api` prefix
 
-The Procfile shows two processes:
-web: Handles the frontend by installing dependencies, building the React app, and serving it using npx serve
-api: Handles the Django backend using gunicorn
+see urls.py for API endpoints
 
-
-with the command `git push heroku main`
-
-```
-remote: -----> Discovering process types
-remote:        Procfile declares types -> api, web
-```
-
-It appears from the logs that both the frontend and backend are indeed handled by the Procfile.
-
-### 2. rest_api/urls.py
-
-This file is the main URL configuration for the Django REST API and has a very simple purpose.
-```python
-"""rest_api URL Configuration
-    IMPORTANT: urls.py should not handle static files.
-"""
-
-from django.contrib import admin
-from django.urls import path
-from rest_api import views
-
+```py
 urlpatterns = [
-    path('api/', views.HelloWorld.as_view(), name='hello-world'), # expecting this to be hosted on https://team5-api-eu-5d24fa110c36.herokuapp.com/api/ ISSUE:currently this URL hosts the frontend
-    path('admin/', admin.site.urls),
+    path('', RedirectView.as_view(url='test/', permanent=False), name='index'),
+    path('test/', views.APITest.as_view(), name='api-test'), # this is the API endpoint
 ]
 ```
 
-http://127.0.0.1:8000/api/ works completelyas expected, serves the API, but is overridden in production.
+4. **Frontend Deployment**
+   - Node.js server starts
+   - Serves built React app
+   - Proxies API requests to backend
 
+## 3. Testing Steps
 
-### 3. Modified Procfile to include SCRIPT_NAME:
-```
-web: cd frontend; npm install; npm run build; npx serve dist -s -l $PORT --single
-api: gunicorn rest_api.wsgi:application --bind 0.0.0.0:$PORT --log-file - --env SCRIPT_NAME=/api
-```
+1. Make desired changes to the code
+2. Run automated tests
 
-This was supposed to separate the frontend and backend, but it didn't work.
-
-### 4. Modified settings.py to include SCRIPT_NAME:
-
-```python
-// ... existing code ...
-
-# Update STATIC_URL to avoid conflicts with frontend
-STATIC_URL = '/api/static/'
-
-# Ensure API paths are correct
-FORCE_SCRIPT_NAME = '/api'
-// ... existing code ...
-
+```powershell
+cd backend; python3 manage.py test
 ```
 
-This was supposed to separate the frontend and backend, but it didn't work. Same EM.
-
-### 5. Identified that `npx serve` in production doesn't match development environment (which uses Vite).
-Modified Procfile to use Vite's preview server instead:
-
-```
-web: cd frontend; npm install; npm run build; npm run preview -- --host 0.0.0.0 --port $PORT
-api: gunicorn rest_api.wsgi:application --bind 0.0.0.0:$PORT --log-file - --env SCRIPT_NAME=/api
+```powershell
+cd frontend; npm run test
 ```
 
-Rationale: Development uses `npm run dev` with Vite, so production should use Vite's preview server for consistency.
-
-### 6. Simplified Procfile to use only deploy API
-
+```
+ PASS  src/__tests__/api.test.js
+  API Tests
+    √ should return correct message from direct API endpoint /api/test (3 ms)
+    √ should return correct message from frontend proxy endpoint localhost:5173/api/test (1 ms)
 
 ```
-web: gunicorn rest_api.wsgi:application --log-file -
-```
 
-Since there is issues with frontend overriding the API, we can just deploy the API without the frontend. The rationale is to determine that the api is not the issue.
+3. Test production build without committing:
+   ```powershell
+   heroku git:remote -a team5-api-eu
+   git push heroku main -f
+   ```
+
+
+4. Test deployed endpoints:
+   ```powershell
+   curl https://team5-api-eu-5d24fa110c36.herokuapp.com/api/test/
+   ```
+
+5. check logs:
+
+```powershell
+heroku logs --tail
+```

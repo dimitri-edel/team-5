@@ -6,7 +6,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = [
             'profile_id', 'user', 'display_name', 'age', 'is_online',
-            'bio', 'avatar_url', 'gender', 'sexual_orientation',
+            'bio', 'avatar_image', 'gender', 'sexual_orientation',
             'country', 'city', 'contact', 'interests', 'other_details',
             'created_at', 'updated_at'
         ]

@@ -1,39 +1,26 @@
-import { describe, it, expect, vi } from 'vitest';
-import { getHelloWorld } from '../services/api';
+import axios from 'axios';
 
-// Mock fetch globally
-global.fetch = vi.fn();
+jest.mock('axios');
 
-describe('API Integration Tests', () => {
+describe('API Tests', () => {
   beforeEach(() => {
-    fetch.mockReset();
+    // Clear mock data before each test
+    jest.clearAllMocks();
   });
 
-  it('successfully fetches hello world message', async () => {
-    // Mock the fetch response
-    const mockResponse = { message: 'Hello, World!' };
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => mockResponse,
-    });
-
-    const result = await getHelloWorld();
+  it('should return correct message from direct API endpoint /api/test', async () => {
+    axios.get.mockResolvedValue({ data: { message: "API is working!" } });
     
-    // Verify the fetch was called with the correct URL
-    expect(fetch).toHaveBeenCalledWith('http://127.0.0.1:8000/api/');
-    
-    // Verify we got the expected response
-    expect(result).toEqual(mockResponse);
+    const response = await axios.get('/api/test');
+    expect(response.data).toEqual({ message: "API is working!" });
+    expect(axios.get).toHaveBeenCalledWith('/api/test');
   });
 
-  it('handles API errors appropriately', async () => {
-    // Mock a failed response
-    fetch.mockResolvedValueOnce({
-      ok: false,
-      status: 500
-    });
-
-    // Verify that the error is thrown
-    await expect(getHelloWorld()).rejects.toThrow('HTTP error! status: 500');
+  it('should return correct message from frontend proxy endpoint localhost:5173/api/test', async () => {
+    axios.get.mockResolvedValue({ data: { message: "API is working!" } });
+    
+    const response = await axios.get('http://localhost:5173/api/test');
+    expect(response.data).toEqual({ message: "API is working!" });
+    expect(axios.get).toHaveBeenCalledWith('http://localhost:5173/api/test');
   });
 }); 

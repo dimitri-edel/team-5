@@ -20,9 +20,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_api import views
+from django.conf.urls import handler404, handler500
+from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('', views.HelloWorld.as_view(), name='hello-world'),
+    path('', RedirectView.as_view(url='test/', permanent=False), name='index'),
+    path('test/', views.APITest.as_view(), name='api-test'),
     path('admin/', admin.site.urls),
-    path('api/', include('rest_api.user_profile.urls')),
+    path('profile/', include('rest_api.user_profile.urls')),
+    path('likes/', include('rest_api.likes.urls')),
+    path('match/', include('rest_api.match.urls')),
 ]
+
+handler404 = 'rest_api.views.custom_error_404'
+handler500 = 'rest_api.views.custom_error_500'
