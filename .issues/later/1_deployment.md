@@ -1,28 +1,9 @@
-# Deployment Issues and Flow
+# Deployment Issues and Flow with Frontend Production
 
 ## 1. API Production Issues
 
-### Current Status
 - Development API works: ✅ Returns `{"message":"API is working!"}` at `http://localhost:8000/test/` & `http://localhost:5173/api/test`
 - Production API fails: ❌ Returns `{"error":"Failed to fetch from API"}` at `https://team5-api-eu-5d24fa110c36.herokuapp.app/api/test`
-
-### Identified Issues
-
-1. **URL Configuration Mismatch**
-   - Frontend is trying to access `/api/test` but backend routes to `/test/`
-   - Backend URLs are not properly prefixed with `/api/` in production
-
-2. **CORS Configuration**
-   - Production CORS settings may be too restrictive
-   - Current CORS settings in `settings.py` only allow specific origins
-
-3. **Proxy Configuration**
-   - Frontend server proxy in `server.js` may be incorrectly handling API paths
-   - Double `/api` prefix issue in URL construction
-
-4. **Environment Configuration**
-   - Inconsistent API base URL usage between development and production
-   - Multiple places defining API URLs (frontend components, services, server)
 
 ## 2. Deployment Flow
 

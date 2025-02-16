@@ -5,8 +5,7 @@ from django.http import JsonResponse
 
 class APITest(APIView):
     def get(self, request):
-        data = {"message": "API is working!"}
-        return Response(data, content_type="application/json")
+        return JsonResponse({"message": "API is working!"})
 
 def custom_error_404(request, exception):
     return JsonResponse({'error': 'Not Found'}, status=404)
