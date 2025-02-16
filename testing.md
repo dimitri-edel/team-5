@@ -3,7 +3,10 @@
 ## Environment URLs
 
 - **Production**: `https://team5-api-eu-5d24fa110c36.herokuapp.app/` (both API and frontend)
-- **Development**: `http://127.0.0.1:8000/`
+- **Development**: 
+  - `http://127.0.0.1:8000/` (API only)
+  - `http://localhost:5173/` (frontend)
+  - `http://localhost:5173/api` (API proxy)
 
 ## Application Structure
 - API is hosted in `/api`
