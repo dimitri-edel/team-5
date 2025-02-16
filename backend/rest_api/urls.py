@@ -20,8 +20,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_api import views
+from django.conf.urls import handler404, handler500
 
 urlpatterns = [
     path('test/', views.HelloWorld.as_view(), name='hello-world'),
     path('admin/', admin.site.urls),
 ]
+
+handler404 = 'rest_api.views.custom_error_404'
+handler500 = 'rest_api.views.custom_error_500'

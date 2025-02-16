@@ -45,14 +45,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://team5-api-eu-5d24fa110c36.herokuapp.com",
-    "http://localhost:8000",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
 
 # Ensure all API responses have CORS headers
 # CORS_URLS_REGEX = r'^/api/.*$'
@@ -132,6 +124,9 @@ WSGI_APPLICATION = 'rest_api.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
     ),
 }
 
