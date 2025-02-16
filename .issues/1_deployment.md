@@ -63,13 +63,32 @@ urlpatterns = [
 ## 3. Testing Steps
 
 1. Make desired changes to the code
+2. Run automated tests
 
-2. Test production build without committing:
+```powershell
+cd backend; python3 manage.py test
+```
+
+```powershell
+cd frontend; npm run test
+```
+
+```
+ PASS  src/__tests__/api.test.js
+  API Tests
+    √ should return correct message from direct API endpoint /api/test (3 ms)
+    √ should return correct message from frontend proxy endpoint localhost:5173/api/test (1 ms)
+
+
+```
+
+3. Test production build without committing:
    ```powershell
    git push heroku main -f
    ```
 
-3. Test deployed endpoints:
+
+4. Test deployed endpoints:
    ```powershell
    curl https://team5-api-eu-5d24fa110c36.herokuapp.com/api/test/
    ```
