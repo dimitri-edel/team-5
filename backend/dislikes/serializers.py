@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Dislike
+from .models import Dislikes
 
 class DislikeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Dislike
+        model = Dislikes
         fields = ['id', 'user', 'disliked_profile', 'created_at']

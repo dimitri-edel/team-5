@@ -124,7 +124,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'user_profile',
     'match',
-    'likes',    
+    'likes', 
+    'dislikes',   
 ]
 
 ASGI_APPLICATION = 'rest_api.asgi.application'
@@ -206,7 +207,7 @@ LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
 # Account settings
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_LOGIN_METHODS = {'username', 'email'}
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Options: 'mandatory', 'optional', 'none'
 
 
@@ -249,4 +250,7 @@ django_heroku.settings(locals())
 
 # Ensure STATIC_ROOT exists
 os.makedirs(STATIC_ROOT, exist_ok=True)
+
+# Set the default auto field
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
