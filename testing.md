@@ -73,3 +73,27 @@ use `git push main` to deploy to production
 | Backend | `https://team5-api-eu-5d24fa110c36.herokuapp.app/` | `/test` | GET | Returns API TEST | ❌ |
 
 
+# Automated Testing
+
+## Unit Testing
+
+```bash
+cd backend; python3 manage.py test
+```
+
+## Integration Testing
+
+```bash
+cd frontend; npm run test
+```
+
+## E2E Testing
+
+```bash
+cd frontend; npx run playwright test --ui
+```
+
+## Manual Testing
+
+```bash
+
