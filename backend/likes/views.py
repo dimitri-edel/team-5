@@ -3,7 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Like
 from .serializers import LikeSerializer
-from rest_api.user_profile.models import UserProfile
+from user_profile.models import UserProfile
 
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
