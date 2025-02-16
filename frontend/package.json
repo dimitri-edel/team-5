@@ -7,14 +7,13 @@
     "node": "18.x"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
+    "start": "node server.js",
+    "build": "npm run build:client",
+    "build:client": "esbuild src/main.jsx --bundle --outfile=dist/assets/js/main.js --loader:.js=jsx --loader:.jsx=jsx --loader:.css=css --format=esm --sourcemap --minify",
+    "dev": "nodemon server.js",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "heroku-postbuild": "npm run build",
-    "start": "node server.js"
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "axios": "^1.7.9",
@@ -28,20 +27,20 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.1.5",
     "react-switch": "^7.0.0",
-    "serve": "^14.2.4"
+    "serve": "^14.2.4",
+    "esbuild": "^0.20.2",
+    "nodemon": "^3.1.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.50.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
-    "@vitejs/plugin-react": "^4.2.1",
     "@vitest/ui": "^3.0.5",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "happy-dom": "^17.1.0",
     "msw": "^2.7.0",
-    "vite": "^5.4.14",
     "vitest": "^3.0.5"
   }
 }
