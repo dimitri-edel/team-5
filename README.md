@@ -1,4 +1,4 @@
-# ❤ Code to Love! ❤
+# HeartHub 🫶🏻
 
 To Do (After finishing the project, add here an image of how the main page looks like)
 
@@ -24,14 +24,74 @@ Our team addressed these applicable criteria:
 
 ## **Intro**
 
+Welcome to Heart Hub 🫶🏻 a dating web app built to connect people in a straightforward and reliable way. Inspired by the idea of “Love.exe – Coding connections in the digital age,” Heart Hub uses modern technology and smart matchmaking to help users find genuine relationships. We focus on creating a platform that’s user-friendly, safe, and accessible for everyone.
 
 
 ## **Goal**
 
+Our goal is to redefine online dating by developing a service that emphasizes inclusion, safety, and simplicity. We aim to use innovative algorithms and clear design to ensure that every user has a smooth experience while finding meaningful connections in a secure digital space.
 
 ## User Stories
 
-* As a user, I want to be able to .... so i can ......
+
+#### 1. Registration
+**As a user**, I can sign up for the application so that I can start using the application.
+
+**Acceptance Criteria:**
+1. User signs up with valid email and strong password
+2. User gets feedback on screen if signup is successful or not
+3. User gets redirected to the Login page if signup is successful
+
+#### 2. Sign In
+**As a registered user**, I can log into the application so that I can access my account and use the features.
+
+**Acceptance Criteria:**
+1. User can enter email and password to login
+2. User gets feedback if credentials are incorrect
+3. User gets redirected to profile feed after successful login
+4. User session is maintained until logout
+5. User can request password reset if forgotten
+
+#### 3. Log Out
+**As a logged-in user**, I can log out of the application so that my account remains secure when I'm not using it.
+
+**Acceptance Criteria:**
+1. User can log out from any page in the application
+2. User session is terminated upon logout
+3. User is redirected to login page after logout
+4. User cannot access protected routes after logging out
+
+#### 4. Profile Feed
+**As a logged-in user**, I can view a feed of profiles so that I can discover and connect with other users.
+
+**Acceptance Criteria:**
+1. User can view a list of other user profiles
+2. Feed shows basic profile information (name, photo, status)
+3. Feed updates automatically or can be manually refreshed
+4. User can scroll through profiles with pagination
+5. User can search/filter profiles based on criteria
+
+#### 5. Profile Detail
+**As a logged-in user**, I can view and edit my profile details so that I can maintain my information and customize my presence.
+
+**Acceptance Criteria:**
+1. User can view their complete profile information
+2. User can edit their profile details (name, photo, bio, etc.)
+3. User can see changes reflected immediately after saving
+4. User gets feedback when profile updates are successful/unsuccessful
+5. User can view other users' profiles in read-only mode
+
+#### 6. Chat
+**As a logged-in user**, I can chat with other users so that I can communicate and interact with them.
+
+**Acceptance Criteria:**
+1. User can start a new chat with another user
+2. User can send and receive text messages in real-time
+3. User gets notifications for new messages
+4. User can see online/offline status of other users
+5. Chat history is preserved between sessions
+6. User can see when messages are read/delivered
+
 
 ## Postponed till next Iteration
 The initial goal was to implement a live private messaging system using **Channels** and Websockets. The idea got discarded due to complexity, that would jeopardize the goal of dilivering before the dead line. 
@@ -174,6 +234,9 @@ Click on [Results]() to view the performance.... To Do
    Design/ Development / Documentation
 
   - **Allan** - [GitHub](https://github.com/Allano256),
+   Design/ Development / Documentation
+
+   - **Hira** - [GitHub](https://github.com/hirakhan95),
    Design/ Development / Documentation
 
 
