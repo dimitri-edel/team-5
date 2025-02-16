@@ -1,18 +1,6 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from '../../context/authProvider';
-import { Link} from "react-router-dom";
 import axios from 'axios';
-import { Row } from 'react-bootstrap';
-import Col from "react-bootstrap/Col";
-import styles from "../../styles/signUpInForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
-import {
-    Form,
-    Button,
-    Container,
-    Alert,
-} from "react-bootstrap";
 // To Do ... Once the Backend is ready
 //const LOGIN_URL = '/auth';
 const SignIn = () => {
@@ -66,17 +54,6 @@ const SignIn = () => {
     }
 
     return (
-        <Row className={styles.Row}>
-            <Col
-                lg={6}
-                className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
-            >
-
-            </Col>
-            <Col className="my-auto py-2 p-md-2" lg={6}>
-        <Container className={`${appStyles.SignInUpContainer} `}>
-       
-                    <h1 className={styles.Header}>sign in</h1>
         <>
             {success ? (
                 <section>
@@ -89,54 +66,39 @@ const SignIn = () => {
             ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    
-                    <Form onSubmit={handleSubmit}>
-                         <Form.Group controlId="userEmail">
-                            <Form.Label className="d-none">userEmail</Form.Label>
-                            <Form.Control
-                                className={styles.Input}
-                                type="email"
-                                id="userEmail"
-                                placeholder="userEmail"
-                                ref={userRef}
-                                autoComplete="off"
-                                onChange={(e) => setUserEmail(e.target.value)}
-                                value={userEmail}
-                                required
-                            />
-                        </Form.Group>
+                    <h1>Sign In</h1>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="userEmail">UserEmail:</label>
+                        <input
+                            type="email"
+                            id="userEmail"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUserEmail(e.target.value)}
+                            value={userEmail}
+                            required
+                        />
 
-                            <Form.Group controlId="password">
-                                <Form.Label className="d-none">Password</Form.Label>
-                                <Form.Control
-                                    className={styles.Input}
-                                    type="password"
-                                    id="password"
-                                    placeholder="Password"
-                                    onChange={(e) => setPwd(e.target.value)}
-                                    value={pwd}
-                                    required
-                                />
-                            </Form.Group>
-
-                            <Button
-                                className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
-                                type="submit"
-                            >
-                                Sign in
-                            </Button>
-
-                    </Form>
-                    <Link className={styles.Link} to="/SignUp">
-                        Need an account? <span>Sign Up</span>
-                    </Link>
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            onChange={(e) => setPwd(e.target.value)}
+                            value={pwd}
+                            required
+                        />
+                        <button>Sign In</button>
+                    </form>
+                    <p>
+                        Need an Account?<br />
+                        <span className="line">
+                            {/*put router link here*/}
+                            <a href="#">Sign Up</a>
+                        </span>
+                    </p>
                 </section>
             )}
         </>
-        </Container>
-        </Col>
-        </Row>
-        
     )
 }
 
