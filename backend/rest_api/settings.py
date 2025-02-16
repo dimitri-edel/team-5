@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'user_profile',
+    'rest_api.user_profile',
     
 ]
 
@@ -130,8 +130,8 @@ WSGI_APPLICATION = 'rest_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'DB_NAME': os.environ['DB_NAME'],
-        'DB_USERNAME': os.environ['DB_USERNAME'],
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USERNAME'],
         'PASSWORD': os.environ['DB_PASSWORD'],
         'HOST': os.environ['DB_HOST'],
         'PORT': os.environ['DB_PORT'],

@@ -24,5 +24,5 @@ from rest_api import views
 urlpatterns = [
     path('', views.HelloWorld.as_view(), name='hello-world'),
     path('admin/', admin.site.urls),
-    path('api/', include('user_profile.urls')),
+    path('api/', include('rest_api.user_profile.urls')),
 ]
