@@ -60,7 +60,7 @@ cd frontend; npm run dev
 
 | Endpoint | Method | Expected Response | Development Result | Production Result |
 |----------|---------|------------------|-------------------|-------------------|
-| `/test` | GET | Returns API TEST | ✅ `{"message":"API is working!"}` | ❌ `{"error":"Failed to fetch from API"}` |
+| `/test` | GET | Returns API TEST | ❌ `{"error":"Failed to fetch from API"}` | ❌ `{"error":"Failed to fetch from API"}` |
 
 ### Main URLs
 
