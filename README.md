@@ -107,12 +107,21 @@ To Do ....
 - font...... To Do
 
 ### Imagery
-- Team Logo
-To Do ....
+![Logo](./staticfiles/images/logo_2.png)
 
 ## Wireframes
 
-To Do ....
+![About](./frontend/src/assets/wireframes/About.png)
+
+![About](./frontend/src/assets/wireframes/About.png)
+
+![About](./frontend/src/assets/wireframes/About.png)
+
+![Profile](./frontend/src/assets/wireframes/Profile.png)
+
+![SignIn](./frontend/src/assets/wireframes/SignIn.png)
+
+![SignUp](./frontend/src/assets/wireframes/SignUp.png)
 
 ## System Design
 
