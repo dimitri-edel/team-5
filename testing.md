@@ -50,10 +50,12 @@ cd frontend; npm run dev
 | Backend | `http://127.0.0.1:8000/` | `/test` | GET | Returns API TEST | ✅ `{"message":"API is working!"}` |
 | | | | | | |
 | Frontend | `http://localhost:3000/` |`/` | GET | Returns Auth view in frontend | ✅ (2 EMs, 2 warnings) | 
+| Frontend | `http://localhost:3000/` | `api/test` | GET | Returns API call `{"message":"API is working!"}` | ✅ `{"message":"API is working!"}` |
+| | | | | | |
+| | | | | | |
 | Frontend | `http://localhost:3000/` | `/SignIn` | GET | Returns SignIn | ✅ | 
 | Frontend | `http://localhost:3000/` | `/SignUp` | GET | Returns SignIn | ✅ | 
 | Frontend | `http://localhost:3000/` | `/SignUp` | POST | Creates user in DB | no action | no action |
-| Frontend | `http://localhost:3000/` | `api/test` | GET | Returns API call `{"message":"API is working!"}` | ✅ `{"message":"API is working!"}` |
 
 
 
@@ -61,7 +63,7 @@ cd frontend; npm run dev
 
 ### Prerequisites
 
-use git push main to deploy to production
+use `git push main` to deploy to production
 
 ### Production Layer Endpoints
 
