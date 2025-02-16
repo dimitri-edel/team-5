@@ -92,8 +92,3 @@ cd frontend; npm run test
 ```bash
 cd frontend; npx run playwright test --ui
 ```
-
-## Manual Testing
-
-```bash
-
