@@ -21,4 +21,4 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     def my_profile(self, request):
         profile = UserProfile.objects.get(user=request.user)
         serializer = self.get_serializer(profile)
-        return Response(serializer.data) 
+        return Response(serializer.data)

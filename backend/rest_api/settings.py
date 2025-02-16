@@ -13,10 +13,6 @@ import os
 import dj_database_url
 import django_heroku
 
-from dotenv import load_dotenv
-load_dotenv()
-
-
 if os.path.exists("rest_api/env.py"):
     from .env import *
 
@@ -33,6 +29,15 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-test-key-do-not-use-i
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False  # Set to False in production
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'team5-api-eu-5d24fa110c36.herokuapp.com']
+
+# CLOUDINARY
+CLOUDINARY_STORAGE = {"CLOUDINARY_URL": os.environ["CLOUDINARY_URL"]}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 
 # CORS settings for API access
@@ -67,8 +72,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_api',
     'rest_framework',
-    'corsheaders',
-    'channels',
+    'corsheaders',    
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -196,10 +200,6 @@ DATABASES['default'].update(dj_database_url.config(conn_max_age=500, ssl_require
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'team5-api-eu-5d24fa110c36.herokuapp.com']
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
