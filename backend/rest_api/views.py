@@ -2,9 +2,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
 
-class HelloWorld(APIView):
+class APITest(APIView):
     def get(self, request):
-        data = {"message": "Hello, World!"}
+        data = {"message": "API is working!"}
         return Response(data, content_type="application/json")
 
 def custom_error_404(request, exception):
@@ -12,3 +12,6 @@ def custom_error_404(request, exception):
 
 def custom_error_500(request):
     return JsonResponse({'error': 'Server Error'}, status=500)
+
+        
+
