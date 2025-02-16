@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fetch from 'node-fetch';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -50,9 +51,14 @@ app.use('/api', (req, res) => {
   const apiUrl = process.env.NODE_ENV === 'production' 
     ? 'https://team5-api-eu-5d24fa110c36.herokuapp.com'  // Remove /api since it's already in the path
     : 'http://127.0.0.1:8000';
+
+  console.log(apiUrl);
   
+  const fullUrl = `${apiUrl}${req.url}`;
+  console.log(`Proxying request to: ${fullUrl}`);
+
   // Forward the request to the API
-  fetch(`${apiUrl}${req.url}`, {
+  fetch(fullUrl, {
     method: req.method,
     headers: {
       ...req.headers,
@@ -60,7 +66,14 @@ app.use('/api', (req, res) => {
     },
     body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined
   })
-  .then(apiRes => apiRes.json())
+  .then(apiRes => {
+    if (!apiRes.ok) {
+      return apiRes.text().then(text => {
+        throw new Error(`API request failed with status ${apiRes.status}: ${text}`);
+      });
+    }
+    return apiRes.json();
+  })
   .then(data => res.json(data))
   .catch(error => {
     console.error('API proxy error:', error);
@@ -91,4 +104,4 @@ app.listen(PORT, '0.0.0.0', () => {
     console.error('Server error:', err);
     process.exit(1);
   }
-}); 
+});

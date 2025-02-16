@@ -1,5 +1,7 @@
 asgiref==3.8.1
+certifi==2025.1.31
 channels==4.2.0
+cloudinary==1.42.2
 dj-database-url==0.5.0
 Django==5.1.6
 django-allauth==65.4.1
@@ -16,4 +18,5 @@ shortuuid==0.5.0
 six==1.11.0
 sqlparse==0.5.3
 tzdata==2025.1
+urllib3==2.3.0
 whitenoise==5.3.0

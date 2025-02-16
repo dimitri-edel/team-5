@@ -1,11 +1,17 @@
-from django.views.generic.base import View # it's here because this is views.py. Ya might need it
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
-from rest_api.serializers import MessageSerializer
+from django.http import JsonResponse
 
-class HelloWorld(APIView):
+class APITest(APIView):
     def get(self, request):
-        data = {"message": "Hello, World!"}
-        serializer = MessageSerializer(data)
-        return Response(serializer.data)
+        data = {"message": "API is working!"}
+        return Response(data, content_type="application/json")
+
+def custom_error_404(request, exception):
+    return JsonResponse({'error': 'Not Found'}, status=404)
+
+def custom_error_500(request):
+    return JsonResponse({'error': 'Server Error'}, status=500)
+
+        
+

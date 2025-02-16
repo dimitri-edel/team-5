@@ -1,18 +1,25 @@
 
 .App{
     font-family: 'Gluten', cursive;
-    background-color: #CBEEF3;
+    
     min-height: 100vh;
 }
 .Main{
-    padding-top: 12em;
+    padding-top: 1em;
 }
 
 .SignInUpContainer{
-    width: 70%;
+    max-width: 50%;
     background-color: #CBEEF3;
-    padding: 10px;
+    padding: 1rem;
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     border: 1px solid #F49CBB;
     box-shadow: 0 2px 4px #F26A8D;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+.container{
+    max-width: 50%;
 }
