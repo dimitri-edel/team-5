@@ -48,8 +48,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://team5-api-eu-5d24fa110c36.herokuapp.com',
+        target: 'http://localhost:8000',
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '') // remove /api from the path
       },
     },
   },
