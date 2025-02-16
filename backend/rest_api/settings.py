@@ -46,7 +46,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # Ensure all API responses have CORS headers
-CORS_URLS_REGEX = r'^/api/.*$'
+# CORS_URLS_REGEX = r'^/api/.*$'
 # Application definition
 
 INSTALLED_APPS = [
