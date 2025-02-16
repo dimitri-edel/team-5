@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
@@ -12,5 +13,8 @@ def custom_error_404(request, exception):
 def custom_error_500(request):
     return JsonResponse({'error': 'Server Error'}, status=500)
 
-        
+def home(request):
+    return render(request, 'home.html')  # Render a standard Django template
+
+
 
