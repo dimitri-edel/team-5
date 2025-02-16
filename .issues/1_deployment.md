@@ -79,11 +79,11 @@ cd frontend; npm run test
     √ should return correct message from direct API endpoint /api/test (3 ms)
     √ should return correct message from frontend proxy endpoint localhost:5173/api/test (1 ms)
 
-
 ```
 
 3. Test production build without committing:
    ```powershell
+   heroku git:remote -a team5-api-eu
    git push heroku main -f
    ```
 
@@ -92,3 +92,9 @@ cd frontend; npm run test
    ```powershell
    curl https://team5-api-eu-5d24fa110c36.herokuapp.com/api/test/
    ```
+
+5. check logs:
+
+```powershell
+heroku logs --tail
+```
