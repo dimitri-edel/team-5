@@ -7,6 +7,7 @@ import SignUp from "./pages/registration/SignUp";
 import SignIn from "./pages/registration/SignIn";
 import AboutPage from "./pages/About";
 import NavBar from "./components/navbar";
+import TestButton from "./components/TestButton";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     return (
         <div className={styles.App}>
             <NavBar />
+            <TestButton />
             <Container className={styles.Main}>
                 <Routes>
                     <Route path="/SignIn" element={<SignIn />} />
