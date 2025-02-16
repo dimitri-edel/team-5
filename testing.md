@@ -46,9 +46,9 @@ cd frontend; npm run dev
 
 | Endpoint | Method | Expected Response | Development Result | Production Result |
 |----------|---------|------------------|-------------------|-------------------|
-| `/` | GET | Returns Auth view in frontend | ✅ (2 EMs, 2 warnings) | ✅ |
-| `/SignIn` | GET | Returns SignIn | ✅ | ✅ |
-| `/SignUp` | GET | Returns SignIn | ✅ | ✅ |
+| `/` | GET | Returns Auth view in frontend | ✅ (2 EMs, 2 warnings) | ❌ |
+| `/SignIn` | GET | Returns SignIn | ✅ | ❌ |
+| `/SignUp` | GET | Returns SignIn | ✅ | ❌ |
 | `/SignUp` | POST | Creates user in DB | no action | no action |
 
 ## 3. API in Frontend
