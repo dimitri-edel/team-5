@@ -29,7 +29,7 @@ const AboutPage = () => {
                     <Image
                         className={`${appStyles.FillerImage}`}
                         src={
-                            ""
+                            "Add an image"
                         }
                     />
                 </Col>

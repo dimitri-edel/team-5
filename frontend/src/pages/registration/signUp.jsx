@@ -14,7 +14,7 @@ import {
 
 
 
-const SignUpForm = () => {
+const SignUp = () => {
     const [signUpData, setSignUpData] = useState({
         userEmail: "",
         password1: "",
@@ -117,13 +117,14 @@ const SignUpForm = () => {
                             </Alert>
                         ))}
                     </Form>
-                </Container>
-
-                <Container className={`mt-3 ${appStyles.SignInUpContainer}`}>
-                    <Link className={styles.Link} to="/signin">
+                    <Link className={styles.Link} to="/signIn">
                         Already have an account? <span>Sign in</span>
                     </Link>
                 </Container>
+
+                
+                   
+               
             </Col>
 
         </Row>
@@ -131,4 +132,4 @@ const SignUpForm = () => {
     );
 };
 
-export default SignUpForm;
+export default SignUp;
