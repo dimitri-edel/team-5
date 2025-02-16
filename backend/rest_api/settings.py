@@ -27,8 +27,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-test-key-do-not-use-in-production")
 
-# Set DEBUG to True for development and False for production
-DEBUG = True if os.environ.get('DEBUG') == 'True' else False  # Set to False in production
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False  # Set to False in production
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
@@ -72,26 +72,26 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_api',
     'rest_framework',
-    'rest_framework_simplejwt',
     'corsheaders',    
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'rest_api.user_profile',
-    'rest_api.likes',    
+    'user_profile',
+    'match',
+    'likes',    
 ]
 
 ASGI_APPLICATION = 'rest_api.asgi.application'
 
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels.layers.DatabaseChannelLayer',
-#         'CONFIG': {
-#             'capacity': 2 ** 20,  # Maximum number of channels
-#             'expiry': 280,  # Message expiry in seconds
-#         },
-#     },
-# }
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.DatabaseChannelLayer',
+        'CONFIG': {
+            'capacity': 2 ** 20,  # Maximum number of channels
+            'expiry': 280,  # Message expiry in seconds
+        },
+    },
+}
 
 
 MIDDLEWARE = [
@@ -131,50 +131,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rest_api.wsgi.application'
 
-if not DEBUG :
-    # Render JSON responses only and use JWT for authentication
-    REST_FRAMEWORK = {
-        'DEFAULT_RENDERER_CLASSES': (
-            'rest_framework.renderers.JSONRenderer',
-        ),
-        'DEFAULT_PARSER_CLASSES': (
-            'rest_framework.parsers.JSONParser',
-        ),  
-        "DEFAULT_AUTHENTICATION_CLASSES": [
-        ("rest_framework_simplejwt.authentication.JWTAuthentication")
-        ],  
-    }
-else:
-    # Render HTML responses for debugging and use session authentication
-    REST_FRAMEWORK = {
-        'DEFAULT_RENDERER_CLASSES': (
-            'rest_framework.renderers.JSONRenderer',
-            'rest_framework.renderers.BrowsableAPIRenderer',
-        ),
-        'DEFAULT_PARSER_CLASSES': (
-            'rest_framework.parsers.JSONParser',
-            'rest_framework.parsers.FormParser',
-            'rest_framework.parsers.MultiPartParser',
-        ),
-        'DEFAULT_AUTHENTICATION_CLASSES': (
-            'rest_framework.authentication.SessionAuthentication',
-            'rest_framework.authentication.BasicAuthentication',
-        ),        
-    }
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
+}
 
-# enable JWT-Token-based authentication
-REST_USE_JWT = True
-# use JWT-Tokesn over HTTPS-connection only
-JWT_AUTH_SECURE = True
-# Cookie-name for access token
-JWT_AUTH_COOKIE = "hearthub-api-auth"
-# Cookie-name for refresh token
-JWT_AUTH_REFRESH_COOKIE = "hearthub-api-token"
-# To be able to have the front end app and the API deployed to different platforms,
-# set the JWT_AUTH_SAMESITE attribute to 'None'. Without this the cookies would be blocked
-JWT_AUTH_SAMESITE = "None"
-# Set the JWT_AUTH_COOKIE_AGE to 1 hour
-JWT_AUTH_COOKIE_AGE = 3600
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
