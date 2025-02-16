@@ -10,6 +10,13 @@ class UserProfile(models.Model):
         ('P', 'Prefer not to say'),
     ]
 
+    SEXUAL_ORIENTATION_CHOICES = [
+        ('H', 'Heterosexual'),
+        ('G', 'Gay'),
+        ('B', 'Bisexual'),
+        ('Q', 'Queer')
+    ]
+
     profile_id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     display_name = models.CharField(max_length=100)
