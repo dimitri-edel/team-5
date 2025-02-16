@@ -77,7 +77,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_api.user_profile',
-    
+    'rest_api.likes',    
 ]
 
 ASGI_APPLICATION = 'rest_api.asgi.application'

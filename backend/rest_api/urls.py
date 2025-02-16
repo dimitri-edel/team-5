@@ -28,6 +28,7 @@ urlpatterns = [
     path('test/', views.APITest.as_view(), name='api-test'),
     path('admin/', admin.site.urls),
     path('profile/', include('rest_api.user_profile.urls')),
+    path('likes/', include('rest_api.likes.urls')),
 ]
 
 handler404 = 'rest_api.views.custom_error_404'
