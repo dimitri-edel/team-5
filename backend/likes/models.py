@@ -1,5 +1,5 @@
 from django.db import models
-from rest_api.user_profile.models import UserProfile
+from user_profile.models import UserProfile
 
 class Like(models.Model):
     user = models.ForeignKey(UserProfile, related_name='source_profile', on_delete=models.CASCADE)

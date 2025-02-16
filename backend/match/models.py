@@ -1,5 +1,5 @@
 from django.db import models
-from rest_api.user_profile.models import UserProfile
+from user_profile.models import UserProfile
 
 class Match(models.Model):
     user1 = models.ForeignKey(UserProfile, related_name='match_user1', on_delete=models.CASCADE)
