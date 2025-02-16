@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "npm run build:client",
-    "build:client": "esbuild src/main.jsx --bundle --outfile=dist/assets/js/main.js --loader:.js=jsx --loader:.jsx=jsx --loader:.css=css --format=esm --sourcemap --minify",
+    "build:client": "mkdir -p dist && cp src/index.html dist/ && esbuild src/main.jsx --bundle --outfile=dist/assets/js/main.js --loader:.js=jsx --loader:.jsx=jsx --loader:.css=css --format=esm --sourcemap --minify",
     "dev": "nodemon server.js",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -44,6 +44,7 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "happy-dom": "^17.1.0",
     "msw": "^2.7.0"
   }
 }
