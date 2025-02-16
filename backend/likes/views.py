@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .models import Like
 from .serializers import LikeSerializer
 from user_profile.models import UserProfile
+from match.models import Match
 
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
@@ -15,6 +16,11 @@ class LikeViewSet(viewsets.ModelViewSet):
         profile = UserProfile.objects.get(pk=pk)
         like, created = Like.objects.get_or_create(user=request.user.userprofile, likes=profile)
         if created:
+            # Check if the liked user has also liked the current user
+            if Like.objects.filter(user=profile, likes=request.user.userprofile).exists():
+                # Create a match
+                Match.objects.create(user1=request.user.userprofile, user2=profile)
+                return Response({"message": "Match created!"}, status=status.HTTP_201_CREATED)
             return Response(status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_200_OK)
 
