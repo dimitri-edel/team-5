@@ -1,0 +1,41 @@
+.Row {
+    height: calc(100vh - 81px);
+  }
+  .Input {    
+    background: #CBEEF3;
+    border: 1px solid #F26A8D;
+    box-sizing: border-box;
+    border-radius: 2px;
+    color: var(--clr-green-light);
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .Header {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #880D1E;
+    margin-bottom: 30px;
+  }
+  
+  .Link {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+  
+  .Link span {
+    color: #880D1E;
+    font-weight: 500;
+  }
+  
+  .Container {
+    padding: 30px 10px;
+  }
+  

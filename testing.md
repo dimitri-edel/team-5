@@ -30,6 +30,17 @@ cd backend; pip install -r requirements.txt
 cd backend; python3 manage.py runserver
 ```
 
+### Endpoints
+
+| Endpoint | Method | Expected Response | Development Result |
+|----------|---------|------------------|-------------------|
+| `/` | GET | redirect to test | ✅ `{"message":"API is working!"}` |
+| `/test` | GET | Returns API TEST | ✅ `{"message":"API is working!"}` |
+| `/profile` | GET | Returns API TEST | ✅ `{"profiles":"http://127.0.0.1:8000/api/profiles/"}` |
+| `/likes` | GET | Returns API TEST | ✅ `{"likes":"http://127.0.0.1:8000/likes/likes/"}` |
+| `/match` | GET | Returns API TEST | ✅ `{"matches":"http://127.0.0.1:8000/match/matches/"}` |
+
+
 ## 1.2. Frontend Development
 
 ### Prerequisites

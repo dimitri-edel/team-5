@@ -1,0 +1,11 @@
+
+
+
+.SignInUpContainer{
+    width: 70%;
+    background-color: #CBEEF3;
+    padding: 10px;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border: 1px solid #F49CBB;
+    box-shadow: 0 2px 4px #F26A8D;
+}
