@@ -27,8 +27,54 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-test-key-do-not-use-in-production")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False  # Set to False in production
+# if os.environ.get("DEBUG") == "True": # Set DEBUG to True in development environment
+# else DEBUG = False  # Set DEBUG to False in production environment
+if os.environ.get("DEBUG") == "True":
+    DEBUG = True
+else:
+    DEBUG = False
+
+# if Debug is True then let REST_FRAMEWORK use browsable API and session authentication
+# else use JSONRenderer and JSONParser and jwt token authentication
+if DEBUG:
+    REST_FRAMEWORK = {
+        'DEFAULT_RENDERER_CLASSES': (
+            'rest_framework.renderers.JSONRenderer',
+            'rest_framework.renderers.BrowsableAPIRenderer',
+        ),
+        'DEFAULT_PARSER_CLASSES': (
+            'rest_framework.parsers.JSONParser',
+        ),
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.SessionAuthentication',
+        ),
+    }
+else:
+    REST_FRAMEWORK = {
+        'DEFAULT_RENDERER_CLASSES': (
+            'rest_framework.renderers.JSONRenderer',
+        ),
+        'DEFAULT_PARSER_CLASSES': (
+            'rest_framework.parsers.JSONParser',
+        ),
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework_simplejwt.authentication.JWTAuthentication',
+        ),
+    }
+
+# JWT settings
+# enable JWT-Token-based authentication
+REST_USE_JWT = True
+# use JWT-Tokesn over HTTPS-connection only
+JWT_AUTH_SECURE = True
+# Cookie-name for access token
+JWT_AUTH_COOKIE = "hearthub-api-auth"
+# Cookie-name for refresh token
+JWT_AUTH_REFRESH_COOKIE = "hearthub-api-token"
+# To be able to have the front end app and the API deployed to different platforms,
+# set the JWT_AUTH_SAMESITE attribute to 'None'. Without this the cookies would be blocked
+JWT_AUTH_SAMESITE = "None"
+
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
@@ -76,9 +122,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'rest_api.user_profile',
-    'rest_api.likes', 
-    'rest_api.match',   
+    'user_profile',
+    'match',
+    'likes', 
+    'dislikes',   
 ]
 
 ASGI_APPLICATION = 'rest_api.asgi.application'
@@ -131,14 +178,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rest_api.wsgi.application'
 
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    ),
-    'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.JSONParser',
-    ),
-}
 
 
 # Database
@@ -168,7 +207,7 @@ LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
 # Account settings
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_LOGIN_METHODS = {'username', 'email'}
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Options: 'mandatory', 'optional', 'none'
 
 
@@ -211,4 +250,7 @@ django_heroku.settings(locals())
 
 # Ensure STATIC_ROOT exists
 os.makedirs(STATIC_ROOT, exist_ok=True)
+
+# Set the default auto field
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
