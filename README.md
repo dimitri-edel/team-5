@@ -170,8 +170,10 @@ erDiagram
         int like_id PK
         int source_profile_id FK
         int target_profile_id FK
+        boolean read
         datetime liked_at
     }
+    %% read : signifies whether or not the targeted user has read the notification
 
     Dislikes {
         int dislike_id PK
