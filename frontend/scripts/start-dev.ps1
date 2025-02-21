@@ -4,7 +4,7 @@ Write-Host "Starting development servers..."
 # Get the script's directory path
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $rootPath = Resolve-Path (Join-Path $scriptPath "..")
-$apiPath = Resolve-Path (Join-Path $rootPath "..\api-isolated")
+$apiPath = Resolve-Path (Join-Path $rootPath "..\backend")
 
 # Kill any existing processes
 Write-Host "Cleaning up existing processes..."

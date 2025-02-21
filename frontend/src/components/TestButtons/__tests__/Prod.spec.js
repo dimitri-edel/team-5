@@ -9,7 +9,7 @@ import '../GenerateUserLifecycle/__tests__/Prod.spec.js';
 test.describe('Production Environment Setup', () => {
   test.beforeEach(async ({ page }) => {
     // Navigate to production environment
-    await page.goto('https://antelope-frontend-isolate-ea7038a582fe.herokuapp.com/');
+    await page.goto('https://team5-frontend-eu-f40f1bfc04e7.herokuapp.com/');
     await expect(page).toHaveTitle(/Vite \+ React/);
   });
 });

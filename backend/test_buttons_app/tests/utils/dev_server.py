@@ -17,7 +17,7 @@ def dev_server() -> Generator[str, None, None]:
             response = requests.get(f"{dev_server}/api/my-endpoint/")
             assert response.status_code == 200
     """
-    # Get the absolute path to the api-isolated directory
+    # Get the absolute path to the backend directory
     current_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
     
     # Start the server

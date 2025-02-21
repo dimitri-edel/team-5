@@ -24,7 +24,7 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: 'cd ../api-isolated && python manage.py runserver 8000',
+      command: 'cd ../backend && python manage.py runserver 8000',
       url: 'http://localhost:8000/api/test/',
       timeout: 120000,
       reuseExistingServer: !process.env.CI,
