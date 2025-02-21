@@ -221,5 +221,10 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
+        'test_buttons_app': {
+            'handlers': ['console'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+            'propagate': False,
+        },
     },
 }
