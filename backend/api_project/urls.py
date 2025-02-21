@@ -19,8 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api_app.urls')),
+    path('api/', include('test_buttons_app.urls')),
 ]
 
-handler404 = 'api_app.views.custom_error_404'
-handler500 = 'api_app.views.custom_error_500'
+handler404 = 'test_buttons_app.views.custom_error_404'
+handler500 = 'test_buttons_app.views.custom_error_500'

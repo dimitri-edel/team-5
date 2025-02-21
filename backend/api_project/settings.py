@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'api_app',
+    'test_buttons_app',
     # Additional apps from archived settings
     'user_profile',
     'match',
@@ -221,7 +221,7 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-        'api_app': {
+        'test_buttons_app': {
             'handlers': ['console'],
             'level': 'DEBUG' if DEBUG else 'INFO',
             'propagate': False,

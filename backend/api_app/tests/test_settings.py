@@ -40,7 +40,7 @@ LOGGING = {
         'level': 'DEBUG',
     },
     'loggers': {
-        'api_app': {
+        'test_buttons_app': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': False,

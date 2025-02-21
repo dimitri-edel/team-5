@@ -4,7 +4,7 @@ import random
 import string
 from django.urls import reverse
 from rest_framework import status
-from api_app.views.generate_jwt_token import generate_jwt_token
+from test_buttons_app.views.generate_jwt_token import generate_jwt_token
 
 @pytest.fixture
 @pytest.mark.unit

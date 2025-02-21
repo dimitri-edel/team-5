@@ -57,7 +57,7 @@ describe('GetApiMessageButton - Axios Alignment', () => {
     fireEvent.click(screen.getByTestId('api-message-button'))
     
     const [[url]] = vi.mocked(axios.get).mock.calls
-    // This should match the Django URL pattern in api_app/urls.py
+    // This should match the Django URL pattern in test_buttons_app/urls.py
     expect(url).toBe('/api/test/')
   })
 }) 
