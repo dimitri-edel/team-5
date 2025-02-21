@@ -6,7 +6,7 @@ import App from './App.jsx'
 
 // Configure axios base URL
 axios.defaults.baseURL = process.env.NODE_ENV === 'production'
-  ? 'https://antelope-api-isolate-8beb50b26a2a.herokuapp.com'
+  ? 'https://team5-api-eu-5d24fa110c36.herokuapp.com'
   : 'http://localhost:8000';
 
 const root = document.getElementById('root')
