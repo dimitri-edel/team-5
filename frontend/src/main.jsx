@@ -1,20 +1,21 @@
-import React from "react";
-
-import ReactDOM from "react-dom/client";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import axios from 'axios'
 import './index.css'
-import App from './App.jsx';
-import { BrowserRouter as Router } from "react-router-dom";
-import { AuthProvider } from './context/authProvider.jsx'
-import './styles/button.module.css';
+import App from './App.jsx'
 
+// Configure axios base URL
+axios.defaults.baseURL = process.env.NODE_ENV === 'production'
+  ? 'https://team5-api-eu-5d24fa110c36.herokuapp.com'
+  : 'http://localhost:8000';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <Router>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </Router>
-  </React.StrictMode>
-);
+const root = document.getElementById('root')
+if (!root) {
+  throw new Error('Root element not found')
+}
+
+createRoot(root).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+)

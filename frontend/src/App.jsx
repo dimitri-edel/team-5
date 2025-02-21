@@ -1,34 +1,52 @@
-
-import React from "react";
-import styles from "./App.module.css";
-import Container from "react-bootstrap/Container";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import SignUp from "./pages/registration/signUp";
-import SignIn from "./pages/registration/signIn";
-import AboutPage from "./pages/About";
-import NavBar from "./components/navbar";
-import TestButton from "./components/TestButton";
-import "./App.css";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { GenerateJWTButton } from './components/TestButtons/GenerateJwt/GenerateJWTButton'
+import { UserLifecycleButton } from './components/TestButtons/GenerateUserLifecycle/UserLifecycleButton'
+import { APIHealthButton } from './components/TestButtons/GetSupabaseHealth/GetSupaBaseHealthButton'
+import { GetApiMessageButton } from './components/TestButtons/GetApiMessage/GetApiMessageButton'
 
 function App() {
+  const [count, setCount] = useState(0)
+  const [jwtToken, setJwtToken] = useState(null)
 
-    return (
-        <div className={styles.App}>
-            <NavBar />
-            <TestButton />
-            <Container className={styles.Main}>
-                <Routes>
-                    <Route path="/SignIn" element={<SignIn />} />
-                    <Route path="/SignUp" element={<SignUp />} />
-                    <Route path="/AboutPage" element={<AboutPage />} />
-                </Routes>
-            </Container>
+  const handleJwtSuccess = (data) => {
+    setJwtToken(data.token)
+  }
 
-        </div>
+  return (
+    <>
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
 
-    );
+      <div className="test-buttons">
+        <GenerateJWTButton className="test-button" onSuccess={handleJwtSuccess} />
+        <UserLifecycleButton className="test-button" token={jwtToken} />
+        <APIHealthButton className="test-button" />
+        <GetApiMessageButton className="test-button" />
+      </div>
+
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
 }
 
-
-
-export default App;
+export default App
