@@ -1,6 +1,6 @@
 import requests
 
-PROD_URL = "https://antelope-api-isolate-8beb50b26a2a.herokuapp.com"
+PROD_URL = "https://team5-api-eu-5d24fa110c36.herokuapp.com"
 
 def visit_prod_endpoint(endpoint: str = "/") -> requests.Response:
     """
