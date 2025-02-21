@@ -69,8 +69,8 @@ use `git push main` to deploy to production
 
 | Layer | URL | Endpoint | Method | Expected Response | Production Result |
 |----------|---------|------------------|-------------------|-------------------|-------------------|
-| Backend | `https://team5-api-eu-5d24fa110c36.herokuapp.app/` | `/` | GET | redirect to test | ❌ |
-| Backend | `https://team5-api-eu-5d24fa110c36.herokuapp.app/` | `/test` | GET | Returns API TEST | ❌ |
+| Backend | `https://team5-api-eu-5d24fa110c36.herokuapp.app/` | `/` | GET | redirect to test | ❌'something went wrong' 500 error |
+| Backend | `https://team5-api-eu-5d24fa110c36.herokuapp.app/` | `/test` | GET | Returns API TEST | ❌  |
 
 
 # Automated Testing
