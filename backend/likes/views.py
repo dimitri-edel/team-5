@@ -5,11 +5,18 @@ from .models import Like
 from .serializers import LikeSerializer
 from user_profile.models import UserProfile
 from match.models import Match
+from .permissions import IsOwner
 
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
-    permission_classes = [permissions.IsAuthenticated]
+
+    def get_permissions(self):
+        if self.action == 'notifications':
+            self.permission_classes = [permissions.IsAuthenticated]
+        else:
+            self.permission_classes = [IsOwner]
+        return super().get_permissions()
 
     @action(detail=True, methods=['POST'])
     def like(self, request, pk=None):

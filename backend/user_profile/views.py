@@ -3,12 +3,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import UserProfile
 from .serializers import UserProfileSerializer
-from .permissions import IsOwner
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
-    permission_classes = [IsOwner]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         queryset = UserProfile.objects.all()
