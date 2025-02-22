@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from datetime import date
 
 
 class UserProfile(models.Model):
@@ -42,6 +43,11 @@ class UserProfile(models.Model):
     other_details = models.JSONField(default=dict, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def age(self):
+        today = date.today()
+        return today.year - self.birth_date.year - ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
 
     class Meta:
         db_table = "user_profile"
