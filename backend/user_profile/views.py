@@ -1,13 +1,17 @@
 from rest_framework import viewsets, permissions
+from django_filters import rest_framework as filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import UserProfile
 from .serializers import UserProfileSerializer
+from .filters import UserProfileFilter
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = UserProfileFilter
 
     def get_queryset(self):
         queryset = UserProfile.objects.all()

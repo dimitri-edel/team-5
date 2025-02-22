@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     # Cloudinary storage
     'cloudinary_storage',
     'cloudinary',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -177,6 +178,9 @@ if not SUPABASE_URL or not SUPABASE_KEY:
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
 
