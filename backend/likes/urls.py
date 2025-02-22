@@ -1,10 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from . import views
+from .views import LikeViewSet
 
 router = DefaultRouter()
-router.register(r'likes', views.LikeViewSet, basename='like')
+router.register(r'', LikeViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('notifications/', LikeViewSet.as_view({'get': 'notifications'}), name='notifications'),
 ]
