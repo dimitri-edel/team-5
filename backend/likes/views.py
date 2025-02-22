@@ -34,4 +34,11 @@ class LikeViewSet(viewsets.ModelViewSet):
         except Like.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+    @action(detail=False, methods=['GET'])
+    def notifications(self, request):
+        user_profile = request.user.userprofile
+        notifications = Like.objects.filter(likes=user_profile)
+        serializer = self.get_serializer(notifications, many=True)
+        return Response(serializer.data)
+
 
