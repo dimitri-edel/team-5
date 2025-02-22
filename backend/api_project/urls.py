@@ -20,7 +20,10 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('test_buttons_app.urls')),
+    path('profiles/', include('user_profile.urls')),
     path('likes/', include('likes.urls')),
+    path('dislikes/', include('dislikes.urls')),
+    path('matches/', include('match.urls')),
 ]
 
 handler404 = 'test_buttons_app.views.custom_error_404'
