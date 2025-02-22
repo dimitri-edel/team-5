@@ -22,7 +22,7 @@ class UserProfile(models.Model):
     profile_id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     display_name = models.CharField(max_length=100)
-    age = models.IntegerField()
+    birth_date = models.DateField(null=False, blank=False)
     is_online = models.BooleanField(default=False)
     bio = models.TextField(blank=True)
     avatar_image = models.FileField(
