@@ -54,15 +54,15 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'test_buttons_app',
+    # Cloudinary storage
+    'cloudinary_storage',
+    'cloudinary',
+    'django_filters',
     # Additional apps from archived settings
     'user_profile',
     'match',
     'likes',
     'dislikes',
-    # Cloudinary storage
-    'cloudinary_storage',
-    'cloudinary',
-    'django_filters',
 ]
 
 MIDDLEWARE = [
