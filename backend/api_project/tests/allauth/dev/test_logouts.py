@@ -3,9 +3,10 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
+from ..utils.dev_server import dev_server  # Import the dev_server fixture
 
 @pytest.mark.django_db
-def test_user_logout():
+def test_user_logout(dev_server):
     client = APIClient()
     
     # Create a test user
@@ -13,11 +14,12 @@ def test_user_logout():
     
     # Log in the user to obtain the authentication token
     login_url = reverse('rest_login')
+    full_login_url = f"{dev_server}{login_url}"
     login_data = {
         'username': 'testuser',
         'password': 'strongpassword123'
     }
-    login_response = client.post(login_url, login_data, format='json')
+    login_response = client.post(full_login_url, login_data, format='json')
     
     assert login_response.status_code == status.HTTP_200_OK
     assert 'key' in login_response.data
@@ -28,7 +30,8 @@ def test_user_logout():
     
     # Log out the user
     logout_url = reverse('rest_logout')
-    logout_response = client.post(logout_url)
+    full_logout_url = f"{dev_server}{logout_url}"
+    logout_response = client.post(full_logout_url)
     
     assert logout_response.status_code == status.HTTP_200_OK
     assert logout_response.data == {'detail': 'Successfully logged out.'}
