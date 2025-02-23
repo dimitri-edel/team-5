@@ -6,4 +6,6 @@ __all__ = ['dev_server']
 
 """
 Test utilities package initialization.
-""" 
+"""
+
+# This file can be empty
