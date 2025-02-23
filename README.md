@@ -69,7 +69,10 @@ Our goal is to redefine online dating by developing a service that emphasizes in
 2. Feed shows basic profile information (name, photo, status)
 3. Feed updates automatically or can be manually refreshed
 4. User can scroll through profiles with pagination
-5. User can search/filter profiles based on criteria
+5. User can search/filter profiles based on criteria (gender, sexuallity, city, country)
+6. User can like another profile
+7. User can dislike another profile
+8. User can use a special  filter that only shows users who liked their profile
 
 #### 5. Profile Detail
 **As a logged-in user**, I can view and edit my profile details so that I can maintain my information and customize my presence.
