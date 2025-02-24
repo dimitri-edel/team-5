@@ -3,7 +3,7 @@ import re
 import requests
 from django.urls import reverse
 from rest_framework import status
-from ..utils import dev_server  # Import the fixture
+from ..utils.dev_server import dev_server  # Import the dev_server fixture
 
 pytestmark = [pytest.mark.jwt, pytest.mark.integration]
 

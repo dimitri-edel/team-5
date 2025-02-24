@@ -3,10 +3,10 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
-from api_project.tests.allauth.utils.prod_visit import visit_prod_endpoint  # Correct the import path
 
-@pytest.mark.prod_endpoint
-def test_user_logout(visit_prod_endpoint):
+@pytest.mark.unit
+@pytest.mark.django_db
+def test_user_logout():
     client = APIClient()
     
     # Create a test user
@@ -14,12 +14,11 @@ def test_user_logout(visit_prod_endpoint):
     
     # Log in the user to obtain the authentication token
     login_url = reverse('rest_login')
-    full_login_url = f"{visit_prod_endpoint}{login_url}"
     login_data = {
         'username': 'testuser',
         'password': 'strongpassword123'
     }
-    login_response = client.post(full_login_url, login_data, format='json')
+    login_response = client.post(login_url, login_data, format='json')
     
     assert login_response.status_code == status.HTTP_200_OK
     assert 'key' in login_response.data
@@ -30,8 +29,7 @@ def test_user_logout(visit_prod_endpoint):
     
     # Log out the user
     logout_url = reverse('rest_logout')
-    full_logout_url = f"{visit_prod_endpoint}{logout_url}"
-    logout_response = client.post(full_logout_url)
+    logout_response = client.post(logout_url)
     
     assert logout_response.status_code == status.HTTP_200_OK
     assert logout_response.data == {'detail': 'Successfully logged out.'}

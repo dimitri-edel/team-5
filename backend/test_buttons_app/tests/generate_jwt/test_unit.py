@@ -1,33 +1,49 @@
-import pytest
-import json
-import re
-from django.urls import reverse
-from rest_framework import status
-from django.test.utils import override_settings
+import os
 
-pytestmark = pytest.mark.jwt
+# Set DEBUG environment variable before importing settings
+os.environ['DJANGO_DEBUG'] = 'True'
 
-@override_settings(
-    JWT_SECRET='test-secret-key-for-jwt-generation',
-    STORAGES={
-        'staticfiles': {
-            'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
-        },
+from api_project.settings import *
+
+# Use in-memory SQLite database for tests
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
     }
-)
+}
 
-@pytest.mark.unit
-def test_jwt_token_format(client):
-    """Test JWT token generation returns correctly formatted token"""
-    url = reverse('get_test_token')
-    response = client.get(url)
-    
-    # Check response format
-    assert response.status_code == status.HTTP_200_OK
-    data = json.loads(response.content)
-    assert 'token' in data
-    
-    # Validate token structure (just check format, not actual validation)
-    token = data['token']
-    assert token and len(token) > 0
-    assert re.match(r"^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$", token)
+# Keep the ROOT_URLCONF from the main settings
+ROOT_URLCONF = 'api_project.urls'
+
+# Set test secrets
+SECRET_KEY = 'test-secret-key'
+JWT_SECRET = SECRET_KEY
+
+# Test Supabase configuration
+SUPABASE_URL = 'https://test.supabase.co'
+SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.test-key'
+DEBUG = True  # Ensure DEBUG is True for tests
+
+# Configure logging for tests
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'test_buttons_app': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+} 

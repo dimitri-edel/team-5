@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, generics
 from django_filters import rest_framework as filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -17,30 +17,15 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     pagination_class = UserProfilePagination
 
     def get_queryset(self):
+        user = self.request.user
         queryset = UserProfile.objects.all()
-        if self.action == 'list':
-            country = self.request.query_params.get('country', None)
-            if country:
-                queryset = queryset.filter(country=country)
+        if self.action == 'list':            
+            # Exclude the profile of the user making the request
+            queryset = queryset.exclude(user=user)
         return queryset
 
-    @action(detail=False, methods=['GET'])
+    @action(detail=False, methods=['GET'], permission_classes=[permissions.IsAuthenticated])
     def my_profile(self, request):
         profile = UserProfile.objects.get(user=request.user)
         serializer = self.get_serializer(profile)
         return Response(serializer.data)
-
-    @action(detail=False, methods=['GET'])
-    def list_profiles(self, request):
-        queryset = self.filter_queryset(self.get_queryset())
-        paginator = self.pagination_class()
-        result_page = paginator.paginate_queryset(queryset, request)
-        response_data = [
-            {
-                "display_name": profile.display_name,
-                "avatar_image": profile.avatar_image.url if profile.avatar_image else None,
-                "age": profile.age,
-            }
-            for profile in result_page
-        ]
-        return paginator.get_paginated_response(response_data)

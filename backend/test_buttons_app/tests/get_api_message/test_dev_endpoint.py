@@ -1,7 +1,7 @@
 import pytest
 import requests
 from rest_framework import status
-from ..utils.dev_server import dev_server
+from ..utils.dev_server import dev_server  # Import the dev_server fixture
 
 @pytest.mark.dev_endpoint
 def test_api_message_dev(dev_server):

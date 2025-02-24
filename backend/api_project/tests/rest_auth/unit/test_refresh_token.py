@@ -4,10 +4,10 @@ from rest_framework import status
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from ..utils.dev_server import dev_server  # Import the dev_server fixture
 
+@pytest.mark.unit
 @pytest.mark.django_db
-def test_refresh_token(dev_server):
+def test_refresh_token():
     client = APIClient()
     
     # Create a test user
@@ -17,12 +17,11 @@ def test_refresh_token(dev_server):
     refresh = RefreshToken.for_user(user)
     
     url = reverse('token_refresh')
-    full_url = f"{dev_server}{url}"
     data = {
         'refresh': str(refresh),
     }
     
-    response = client.post(full_url, data, format='json')
+    response = client.post(url, data, format='json')
     
     assert response.status_code == status.HTTP_200_OK
     assert 'access' in response.data
