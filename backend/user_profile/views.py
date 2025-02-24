@@ -20,10 +20,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     filterset_class = UserProfileFilter
     pagination_class = UserProfilePagination
 
-    def create(self, request, *args, **kwargs):
-        logger.debug(f"Create request data: {request.data}")
-        response = super().create(request, *args, **kwargs)
-        logger.debug(f"Create response data: {response.data}")
+    def create(self, request, *args, **kwargs):        
+        response = super().create(request, *args, **kwargs)        
         return response
 
     def get_queryset(self):
@@ -44,3 +42,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
         self.permission_classes = [permissions.IsAuthenticated, IsOwner]
         self.check_permissions(request)
         return super().update(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        self.permission_classes = [permissions.IsAdminUser]
+        self.check_permissions(request)
+        return super().destroy(request, *args, **kwargs)
