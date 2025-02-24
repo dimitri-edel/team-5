@@ -7,6 +7,10 @@ from .models import UserProfile
 from .serializers import UserProfileSerializer
 from .filters import UserProfileFilter
 from .pagination import UserProfilePagination
+from .permissions import IsOwner  # Import the custom permission
+import logging
+
+logger = logging.getLogger(__name__)
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
@@ -15,6 +19,12 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = UserProfileFilter
     pagination_class = UserProfilePagination
+
+    def create(self, request, *args, **kwargs):
+        logger.debug(f"Create request data: {request.data}")
+        response = super().create(request, *args, **kwargs)
+        logger.debug(f"Create response data: {response.data}")
+        return response
 
     def get_queryset(self):
         user = self.request.user
@@ -29,3 +39,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
         profile = UserProfile.objects.get(user=request.user)
         serializer = self.get_serializer(profile)
         return Response(serializer.data)
+
+    def update(self, request, *args, **kwargs):
+        self.permission_classes = [permissions.IsAuthenticated, IsOwner]
+        self.check_permissions(request)
+        return super().update(request, *args, **kwargs)

@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
@@ -25,7 +26,7 @@ urlpatterns = [
     path('dj-rest-auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('dj-rest-auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include('test_buttons_app.urls')),
-    path('profiles/', include('user_profile.urls')),
+    path('profiles/', include('user_profile.urls')),  # Ensure this is correct
     path('likes/', include('likes.urls')),
     path('dislikes/', include('dislikes.urls')),
     path('matches/', include('match.urls')),
