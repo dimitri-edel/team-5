@@ -20,6 +20,12 @@ class LikeViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['POST'])
     def like(self, request, pk=None):
+        '''Like or unlike a user profile
+        If the user has not liked the profile, create a like object
+        If the user has liked the profile, delete the like object
+        If the liked user has also liked the current user, create
+        a match object
+        '''
         profile = UserProfile.objects.get(pk=pk)
         request_user_profile = UserProfile.objects.get(user=request.user)
         like, created = Like.objects.get_or_create(user=request_user_profile, likes=profile)
@@ -45,5 +51,11 @@ class LikeViewSet(viewsets.ModelViewSet):
         notifications = Like.objects.filter(likes=request_user_profile)
         serializer = self.get_serializer(notifications, many=True)
         return Response(serializer.data)
+
+    @action(detail=False, methods=['GET'])
+    def liked_profiles(self, request):
+        user_profile = UserProfile.objects.get(user=request.user)
+        liked_profiles = Like.objects.filter(user=user_profile).values_list('likes', flat=True)
+        return Response(list(liked_profiles))
 
 
