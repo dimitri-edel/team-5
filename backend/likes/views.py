@@ -47,6 +47,7 @@ class LikeViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['GET'])
     def notifications(self, request):
+        '''Get a list of notifications about received likes for the current user'''
         request_user_profile = UserProfile.objects.get(user=request.user)
         notifications = Like.objects.filter(likes=request_user_profile)
         serializer = self.get_serializer(notifications, many=True)
@@ -54,6 +55,7 @@ class LikeViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['GET'])
     def liked_profiles(self, request):
+        '''Get a list of the primary keys of profiles that the user has liked'''
         user_profile = UserProfile.objects.get(user=request.user)
         liked_profiles = Like.objects.filter(user=user_profile).values_list('likes', flat=True)
         return Response(list(liked_profiles))
