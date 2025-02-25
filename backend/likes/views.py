@@ -22,24 +22,21 @@ class LikeViewSet(viewsets.ModelViewSet):
     def like(self, request, pk=None):
         profile = UserProfile.objects.get(pk=pk)
         like, created = Like.objects.get_or_create(user=request.user.userprofile, likes=profile)
-        if created:
+        if created:            
+            return Response(status=status.HTTP_201_CREATED)
+        elif like:
             # Check if the liked user has also liked the current user
             if Like.objects.filter(user=profile, likes=request.user.userprofile).exists():
                 # Create a match
                 Match.objects.create(user1=request.user.userprofile, user2=profile)
-                return Response({"message": "Match created!"}, status=status.HTTP_201_CREATED)
-            return Response(status=status.HTTP_201_CREATED)
-        return Response(status=status.HTTP_200_OK)
-
-    @action(detail=True, methods=['POST'])
-    def unlike(self, request, pk=None):
-        profile = UserProfile.objects.get(pk=pk)
-        try:
-            like = Like.objects.get(user=request.user.userprofile, likes=profile)
-            like.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except Like.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+                return Response({"message": "Match created!"}, status=status.HTTP_201_CREATED)            
+            else: # Unlike the user
+                try:                    
+                    like.delete()
+                    return Response(status=status.HTTP_204_NO_CONTENT)
+                except Like.DoesNotExist:
+                    return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
     @action(detail=False, methods=['GET'])
     def notifications(self, request):
