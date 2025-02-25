@@ -1,11 +1,7 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
 from .views import LikeViewSet
 
-router = DefaultRouter()
-router.register(r'', LikeViewSet)
-
 urlpatterns = [
-    path('', include(router.urls)),
+    path('like/<int:pk>/', LikeViewSet.as_view({'post': 'like'}), name='likeendpoint'),
     path('notifications/', LikeViewSet.as_view({'get': 'notifications'}), name='notifications'),
 ]

@@ -21,14 +21,15 @@ class LikeViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['POST'])
     def like(self, request, pk=None):
         profile = UserProfile.objects.get(pk=pk)
-        like, created = Like.objects.get_or_create(user=request.user.userprofile, likes=profile)
+        request_user_profile = UserProfile.objects.get(user=request.user)
+        like, created = Like.objects.get_or_create(user=request_user_profile, likes=profile)
         if created:            
             return Response(status=status.HTTP_201_CREATED)
         elif like:
             # Check if the liked user has also liked the current user
-            if Like.objects.filter(user=profile, likes=request.user.userprofile).exists():
+            if Like.objects.filter(user=profile, likes=request_user_profile).exists():
                 # Create a match
-                Match.objects.create(user1=request.user.userprofile, user2=profile)
+                Match.objects.create(user1=request_user_profile, user2=profile)
                 return Response({"message": "Match created!"}, status=status.HTTP_201_CREATED)            
             else: # Unlike the user
                 try:                    
@@ -40,8 +41,8 @@ class LikeViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['GET'])
     def notifications(self, request):
-        user_profile = request.user.userprofile
-        notifications = Like.objects.filter(likes=user_profile)
+        request_user_profile = UserProfile.objects.get(user=request.user)
+        notifications = Like.objects.filter(likes=request_user_profile)
         serializer = self.get_serializer(notifications, many=True)
         return Response(serializer.data)
 
