@@ -8,7 +8,7 @@ from likes.models import Like
 
 @pytest.mark.unit
 @pytest.mark.django_db
-def test_create_like():
+def test_unlike_profile():
     client = APIClient(enforce_csrf_checks=False)  # Disable CSRF checks
     
     # Step 1: Create a target user with a profile
@@ -57,7 +57,16 @@ def test_create_like():
     # Step 5: Confirm that a like has been created. Response status code is 201 for Created.
     assert like_response.status_code == status.HTTP_201_CREATED
     
-    # Step 6: Double check that a like has been created by retrieving the like object from the database
+    # Step 6: Retrieve the id of the created like for later use
     like = Like.objects.get(user=tester_profile, likes=target_profile)
-    assert like.user == tester_profile
-    assert like.likes == target_profile
+    like_id = like.id
+    
+    # Step 7: Have the tester user unlike the target user's profile
+    unlike_response = client.post(like_url, format='json')
+    
+    # Step 8: Confirm that the like has been deleted. Response status code is 204 NO CONTENT.
+    assert unlike_response.status_code == status.HTTP_204_NO_CONTENT
+    
+    # Step 9: Confirm that the like is no longer in the database
+    with pytest.raises(Like.DoesNotExist):
+        Like.objects.get(id=like_id)
