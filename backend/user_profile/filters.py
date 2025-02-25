@@ -1,22 +1,22 @@
+import django_filters
 from django_filters import rest_framework as filters
-from .models import UserProfile
+from user_profile.models import UserProfile
+from datetime import date, timedelta
 
 class UserProfileFilter(filters.FilterSet):
-    min_age = filters.NumberFilter(field_name='birth_date', lookup_expr='lte', method='filter_by_min_age')
-    max_age = filters.NumberFilter(field_name='birth_date', lookup_expr='gte', method='filter_by_max_age')
+    age_min = django_filters.NumberFilter(method='filter_by_age_min')
+    age_max = django_filters.NumberFilter(method='filter_by_age_max')
 
     class Meta:
         model = UserProfile
-        fields = ['country', 'city', 'gender', 'sexual_orientation']
+        fields = ['age_min', 'age_max', 'country', 'city', 'gender', 'sexual_orientation']
 
-    def filter_by_min_age(self, queryset, name, value):
-        from datetime import date
+    def filter_by_age_min(self, queryset, name, value):
         today = date.today()
-        min_birth_date = today.replace(year=today.year - value)
+        min_birth_date = today - timedelta(days=int(value) * 365)
         return queryset.filter(birth_date__lte=min_birth_date)
 
-    def filter_by_max_age(self, queryset, name, value):
-        from datetime import date
+    def filter_by_age_max(self, queryset, name, value):
         today = date.today()
-        max_birth_date = today.replace(year=today.year - value)
+        max_birth_date = today - timedelta(days=int(value) * 365)
         return queryset.filter(birth_date__gte=max_birth_date)
