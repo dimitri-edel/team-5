@@ -41,21 +41,24 @@ class LikeViewSet(viewsets.ModelViewSet):
             user=request_user_profile, likes=profile
         )
         if created:
-            return Response(status=status.HTTP_201_CREATED)
-        elif like:
             # Check if the liked user has also liked the current user
             if Like.objects.filter(user=profile, likes=request_user_profile).exists():
+                print("Match created!")
                 # Create a match
                 Match.objects.create(user1=request_user_profile, user2=profile)
                 return Response(
                     {"message": "Match created!"}, status=status.HTTP_201_CREATED
                 )
-            else:  # Unlike the user
-                try:
-                    like.delete()
-                    return Response(status=status.HTTP_204_NO_CONTENT)
-                except Like.DoesNotExist:
-                    return Response(status=status.HTTP_404_NOT_FOUND)
+            print("Match not created")
+            return Response(status=status.HTTP_201_CREATED)
+        elif like:
+            # Unlike the user
+            try:
+                like.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            except Like.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     @action(detail=False, methods=["GET"])
