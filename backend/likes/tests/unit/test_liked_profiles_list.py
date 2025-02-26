@@ -60,7 +60,7 @@ def test_liked_profiles_list():
         assert like_response.status_code == status.HTTP_201_CREATED
     
     # Step 5: Have the tester user request a list of liked profiles
-    liked_profiles_url = reverse('liked-profiles')
+    liked_profiles_url = reverse('liked-profile-ids')
     liked_profiles_response = client.get(liked_profiles_url, format='json')
     
     # Step 6: Confirm that there is a list of 5 numbers (primary keys) in the response

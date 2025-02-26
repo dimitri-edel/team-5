@@ -29,3 +29,20 @@ class MatchViewSet(viewsets.ModelViewSet):
 
         serializer = UserProfileSerializer(profiles, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    # Flat list of profile ids that the user has matched with
+    @action(detail=False, methods=["GET"])
+    def profile_ids(self, request):
+        user_profile = UserProfile.objects.get(user=request.user)
+        matches = Match.objects.filter(user1=user_profile) | Match.objects.filter(user2=user_profile)
+        # Get the profiles of the users that the user has matched with,
+        # excluding the user's own profile
+
+        profile_ids = []
+        for match in matches:
+            if match.user1 == user_profile:
+                profile_ids.append(match.user2.id)
+            else:
+                profile_ids.append(match.user1.id)
+
+        return Response(profile_ids, status=status.HTTP_200_OK)

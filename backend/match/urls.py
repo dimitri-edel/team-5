@@ -6,5 +6,7 @@ router = DefaultRouter()
 router.register(r'matches', views.MatchViewSet, basename='match')
 
 urlpatterns = [
-    path('matched-profiles/', views.MatchProfiles.as_view({'get': 'profiles'}), name='matched-profiles'),
+    path('', include(router.urls)),
+    path('matched-profiles/', views.MatchViewSet.as_view({'get': 'profiles'}), name='matched-profiles'),
+    path('matched-profile-ids/', views.MatchViewSet.as_view({'get': 'profile_ids'}), name='matched-profile-ids'),
 ]
