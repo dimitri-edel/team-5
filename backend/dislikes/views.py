@@ -20,6 +20,10 @@ class DislikeViewSet(viewsets.ModelViewSet):
         If the user has disliked the profile, delete the dislike object
         '''
         profile = UserProfile.objects.get(pk=pk)
+        # If the requested profile belongs to the user in the request, deny the request
+        if profile.user == request.user:
+            return Response({"message": "You cannot dislike your own profile"}, status=status.HTTP_403_FORBIDDEN)
+        
         request_user_profile = UserProfile.objects.get(user=request.user)
         dislike, created = Dislikes.objects.get_or_create(user=request_user_profile, dislikes=profile)
         if created:            
