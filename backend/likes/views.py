@@ -26,6 +26,10 @@ class LikeViewSet(viewsets.ModelViewSet):
         If the liked user has also liked the current user, create
         a match object
         '''
+        # If the requested profile belongs to the user in the request, deny the request
+        if profile.user == request.user:
+            return Response({"message": "You cannot like your own profile"}, status=status.HTTP_403_FORBIDDEN)
+
         profile = UserProfile.objects.get(pk=pk)
         request_user_profile = UserProfile.objects.get(user=request.user)
         like, created = Like.objects.get_or_create(user=request_user_profile, likes=profile)
