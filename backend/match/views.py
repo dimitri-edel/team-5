@@ -41,7 +41,7 @@ class MatchViewSet(viewsets.ModelViewSet):
         profile_ids = []
         for match in matches:
             if match.user1 == user_profile:
-                profile_ids.append(match.user2.id)
+                profile_ids.append(match.user2.profile_id)
             else:
                 profile_ids.append(match.user1.id)
 
