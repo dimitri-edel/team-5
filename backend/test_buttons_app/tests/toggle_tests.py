@@ -3,7 +3,7 @@ import os
 def rename_test_files():
     # Get the current working directory
     base_dir = os.getcwd()
-    
+
     # Walk through all subdirectories
     for root, dirs, files in os.walk(base_dir):
         for file in files:

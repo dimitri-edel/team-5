@@ -82,12 +82,18 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",  # Ensure this is included
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",  # Add allauth middleware
 ]
+
+print(f"DEBUG status: {DEBUG}")
+# Add this to disable CSRF protection for testing
+if DEBUG:
+    print("Removing CSRF middleware")
+    MIDDLEWARE.remove('django.middleware.csrf.CsrfViewMiddleware')
 
 ROOT_URLCONF = "api_project.urls"
 
@@ -191,15 +197,17 @@ if not SUPABASE_URL or not SUPABASE_KEY:
 
 
 if DEBUG:
+    print("using debug settings")
     # REST Framework settings
     REST_FRAMEWORK = {
         "DEFAULT_AUTHENTICATION_CLASSES": (
             # 'rest_framework_simplejwt.authentication.JWTAuthentication',
             "rest_framework.authentication.TokenAuthentication",  
-            "rest_framework.authentication.SessionAuthentication",
+            # "rest_framework.authentication.SessionAuthentication",
         ),
     }
 else:
+    print("using production settings")
     REST_FRAMEWORK = {
         "DEFAULT_AUTHENTICATION_CLASSES": (
             "rest_framework_simplejwt.authentication.JWTAuthentication",
